@@ -1,6 +1,6 @@
 # Enseeiht_SN_GroupeB
 
-![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png | width=100)
+![Bidoof](https://img.pokemondb.net/sprites/black-white/anim/shiny/bidoof.gif){ width=50% }
 
 Dépot git communs pour les TDs et TPs du groupe B.
 
