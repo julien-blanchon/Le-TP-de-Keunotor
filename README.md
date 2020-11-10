@@ -3,14 +3,14 @@
 Dépot git communs pour les TDs et TPs du groupe B.
 
 ## Avancement des TPs
-- [] Modelisation :x:
-	- [] TP1
-	- [] TP2
-	- [] TP3
-	- [] TP4
-	- [] TP5
-	- [] TP6
-	- [] TP7
+- [ ] Modelisation :x:
+	- [ ] TP1
+	- [ ] TP2
+	- [ ] TP3
+	- [ ] TP4
+	- [ ] TP5
+	- [ ] TP6
+	- [ ] TP7
 - [x] Probas :white_check_mark:
 	- [x] TP1
 - [x] Optimisation :white_check_mark:
