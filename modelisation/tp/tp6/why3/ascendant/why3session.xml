@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="5">
+<prover id="0" name="Alt-Ergo" version="2.0.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="1" name="Coq" version="8.9.1" timelimit="0" steplimit="0" memlimit="0"/>
+<file proved="true">
+<path name=".."/>
+<path name="ascendant.mlw"/>
+<theory name="FactorielleAscendant" proved="true">
+ <goal name="VC factorielle_ascendant" expl="VC for factorielle_ascendant" proved="true">
+ <transf name="split_vc" proved="true" >
+  <goal name="VC factorielle_ascendant.0" expl="loop invariant init" proved="true">
+  <proof prover="0"><result status="valid" time="0.00" steps="3"/></proof>
+  <proof prover="1" edited="ascendant_FactorielleAscendant_VC_factorielle_ascendant_5.v"><result status="highfailure" time="0.30"/></proof>
+  </goal>
+  <goal name="VC factorielle_ascendant.1" expl="loop variant decrease" proved="true">
+  <proof prover="0"><result status="valid" time="0.00" steps="9"/></proof>
+  </goal>
+  <goal name="VC factorielle_ascendant.2" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.02" steps="14"/></proof>
+  <proof prover="1" edited="ascendant_FactorielleAscendant_VC_factorielle_ascendant_6.v"><result status="valid" time="0.38"/></proof>
+  </goal>
+  <goal name="VC factorielle_ascendant.3" expl="postcondition" proved="true">
+  <proof prover="0"><result status="valid" time="0.00" steps="7"/></proof>
+  <proof prover="1" edited="ascendant_FactorielleAscendant_VC_factorielle_ascendant_7.v"><result status="valid" time="0.32"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="5">
+<prover id="0" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="1" name="Coq" version="8.9.1" timelimit="0" steplimit="0" memlimit="0"/>
+<prover id="3" name="Alt-Ergo" version="2.0.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="5" name="CVC4" version="1.5" timelimit="5" steplimit="0" memlimit="1000"/>
+<file proved="true">
+<path name=".."/>
+<path name="induction-etu.mlw"/>
+<theory name="Induction" proved="true">
+ <goal name="append_Nil_left" proved="true">
+ <proof prover="1" edited="inductionmnetu_Induction_append_Nil_left_1.v"><result status="valid" time="0.27"/></proof>
+ <proof prover="3"><result status="valid" time="0.00" steps="2"/></proof>
+ </goal>
+ <goal name="append_Cons_left" proved="true">
+ <proof prover="5"><result status="valid" time="0.03"/></proof>
+ </goal>
+ <goal name="append_Nil_right" proved="true">
+ <proof prover="1" edited="inductionmnetu_Induction_append_Nil_right_1.v"><result status="valid" time="0.32"/></proof>
+ <transf name="induction_ty_lex" proved="true" >
+  <goal name="append_Nil_right.0" proved="true">
+  <proof prover="3"><result status="valid" time="0.00" steps="6"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="append_associative" proved="true">
+ <transf name="induction_ty_lex" proved="true" >
+  <goal name="append_associative.0" proved="true">
+  <proof prover="0"><result status="valid" time="0.01"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="rev_append" proved="true">
+ <transf name="induction_ty_lex" proved="true" >
+  <goal name="rev_append.0" proved="true">
+  <proof prover="3"><result status="valid" time="0.00" steps="20"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="rev_rev" proved="true">
+ <transf name="induction_ty_lex" proved="true" >
+  <goal name="rev_rev.0" proved="true">
+  <proof prover="3"><result status="valid" time="0.01" steps="27"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

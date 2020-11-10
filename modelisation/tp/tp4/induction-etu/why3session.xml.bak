@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="5">
+<prover id="0" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="1" name="Coq" version="8.9.1" timelimit="0" steplimit="0" memlimit="0"/>
+<prover id="2" name="Z3" version="4.4.1" alternative="noBV" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="3" name="Alt-Ergo" version="2.0.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="4" name="Z3" version="4.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="5" name="CVC4" version="1.5" timelimit="5" steplimit="0" memlimit="1000"/>
+<file proved="true">
+<path name=".."/>
+<path name="induction-etu.mlw"/>
+<theory name="Induction">
+ <goal name="append_Nil_left">
+ <proof prover="1" obsolete="true" edited="inductionmnetu_Induction_append_Nil_left_1.v"><result status="valid" time="0.27"/></proof>
+ <proof prover="3" obsolete="true"><result status="valid" time="0.00" steps="2"/></proof>
+ </goal>
+ <goal name="append_Cons_left">
+ <proof prover="5" obsolete="true"><result status="valid" time="0.03"/></proof>
+ </goal>
+ <goal name="append_Nil_right">
+ <proof prover="0" obsolete="true"><result status="unknown" time="0.03"/></proof>
+ <proof prover="1" obsolete="true" edited="inductionmnetu_Induction_append_Nil_right_1.v"><result status="valid" time="0.32"/></proof>
+ <proof prover="3" obsolete="true"><result status="unknown" time="0.02"/></proof>
+ <proof prover="4" obsolete="true"><result status="timeout" time="5.00"/></proof>
+ <proof prover="5" obsolete="true"><result status="unknown" time="0.01"/></proof>
+ <transf name="induction_ty_lex" >
+  <goal name="append_Nil_right.0">
+  <proof prover="3" obsolete="true"><result status="valid" time="0.00" steps="5"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="append_associative">
+ <proof prover="0" obsolete="true"><result status="unknown" time="2.45"/></proof>
+ <proof prover="2" obsolete="true"><result status="timeout" time="5.00"/></proof>
+ <proof prover="3" obsolete="true"><result status="unknown" time="0.00"/></proof>
+ <proof prover="4" obsolete="true"><result status="timeout" time="5.00"/></proof>
+ <proof prover="5" obsolete="true"><result status="unknown" time="0.00"/></proof>
+ <transf name="induction_ty_lex" >
+  <goal name="append_associative.0">
+  <proof prover="0" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <proof prover="2" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <proof prover="3" obsolete="true"><result status="unknown" time="0.07"/></proof>
+  <proof prover="4" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <proof prover="5" obsolete="true"><result status="unknown" time="0.02"/></proof>
+  </goal>
+ </transf>
+ </goal>
+ <goal name="rev_append">
+ <transf name="induction_ty_lex" >
+  <goal name="rev_append.0">
+  <proof prover="3"><result status="valid" time="0.00" steps="20"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

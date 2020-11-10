@@ -1,0 +1,40 @@
+(* Utilisation d'outils de preuve automatique à travers la passerelle Why3 pour résoudre une énigme *)
+
+
+
+theory Enquete
+
+   (* Définition des 3 propositions : A, B, C qui représentent le fait que les accusés sont innocents *)
+   predicate a
+   predicate b
+   predicate c
+
+   predicate da = b /\ (not c)
+   predicate db = a -> c
+   predicate dc = (not c) /\ ( a \/ b )
+
+(* Q1-les declarations sont elles compatibles ?*)
+goal quest_1 : da /\ db /\ dc (*FAUX CONTRE EXEMPLE: a=true; b=false; c=false*)
+
+(* Q2-Lequel de ces témoignages peut se déduire des autres?*) 
+goal quest_2_1 : da /\ db -> dc (*VRAIS: Témoignage de c déductible de a et b*)
+goal quest_2_2 : da /\ dc -> db (*FAUX CONTRE EXEMPLE: a=true; b=true; c=false*)
+goal quest_2_3 : dc /\ db -> da (*VRAIS: Témoignage de a déductible de c et b*)
+
+(*Q3-si ils sont tous innocents qui a menti? *)
+goal quest_3_1 : a /\ b /\ c-> da (*FAUX CONTRE EXEMPLE: a=true; b=true; c=true*)
+goal quest_3_2 : a /\ b /\ c-> db (*VRAIS: Si ils sont tous innocents alors b a nécessairement menti*)
+goal quest_3_3 : a /\ b /\ c-> dc (*FAUX CONTRE EXEMPLE: a=true; b=true; c=true*)
+
+(*Q4 - si tous disent la vérité, qui est coupable? *)
+goal quest_4_1 :da /\ db /\ dc->(not a) (*VRAIS*)
+goal quest_4_2 : da /\ db /\ dc->(not b) (*FAUX CONTRE EXEMPLE: a=false; b=true; c=false*)
+goal quest_4_3 :da /\ db /\ dc-> (not c) (*VRAIS*)
+
+(*Q5-si seuls les innocents disent la vérité , qui est innocent ?*)
+goal quest_5_1 : (da -> a)/\(db -> b)/\(dc->c)->a (*FAUX CONTRE EXEMPLE: a=false; b=true; c=true*)
+goal quest_5_2 :(da -> a)/\(db -> b)/\(dc->c)->b (*VRAIS*)
+goal quest_5_3 :(da -> a)/\(db -> b)/\(dc->c)->c (*VRAIS*)
+                
+end
+

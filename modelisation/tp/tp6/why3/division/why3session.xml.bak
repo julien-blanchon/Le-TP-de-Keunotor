@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="5">
+<prover id="0" name="CVC3" version="2.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="1" name="Z3" version="4.4.1" alternative="noBV" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="2" name="Alt-Ergo" version="2.0.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="3" name="Z3" version="4.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<file>
+<path name=".."/>
+<path name="division.mlw"/>
+<theory name="Division">
+ <goal name="VC division" expl="VC for division">
+ <transf name="split_vc" >
+  <goal name="VC division.0" expl="loop invariant init" proved="true">
+  <proof prover="2"><result status="valid" time="0.00" steps="3"/></proof>
+  </goal>
+  <goal name="VC division.1" expl="loop variant decrease">
+  <proof prover="0" obsolete="true"><result status="unknown" time="0.47"/></proof>
+  <proof prover="1" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  <proof prover="2"><result status="unknown" time="0.01"/></proof>
+  <proof prover="3" obsolete="true"><result status="timeout" time="5.00"/></proof>
+  </goal>
+  <goal name="VC division.2" expl="loop invariant preservation" proved="true">
+  <proof prover="0"><result status="valid" time="0.01"/></proof>
+  <proof prover="2"><result status="valid" time="0.00" steps="7"/></proof>
+  </goal>
+  <goal name="VC division.3" expl="postcondition">
+  <proof prover="0"><result status="unknown" time="0.19"/></proof>
+  <proof prover="1"><result status="timeout" time="5.00"/></proof>
+  <proof prover="2"><result status="unknown" time="0.01"/></proof>
+  <proof prover="3"><result status="timeout" time="5.00"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

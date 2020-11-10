@@ -1,0 +1,40 @@
+(* Utilisation d'outils de preuve automatique à travers la passerelle Why3 pour résoudre une énigme *)
+
+
+
+theory Enquete
+
+   (* Définition des 3 propositions : A, B, C qui représentent le fait que les accusés sont innocents *)
+   predicate a
+   predicate b
+   predicate c
+
+   predicate da = b /\ (not c)
+   predicate db = a -> c
+   predicate dc = (not c) /\ ( a \/ b )
+
+(* Q1-les declarations sont elles compatibles ?*)
+goal quest_1 : da /\ db /\ dc
+
+(* Q2-Lequel de ces témoignages peut se déduire des autres?*) 
+goal quest_2_1 : da /\ db -> dc (*Témoignage de c déductible de a et b*)
+goal quest_2_2 : da /\ dc -> db
+goal quest_2_3 : dc /\ db -> da (*Témoignage de a déductible de c et b*)
+
+(*Q3-si ils sont tous innocents qui a menti? *)
+goal quest_3_1 : a /\ b /\ c-> da
+goal quest_3_2 : a /\ b /\ c-> db 
+goal quest_3_3 : a /\ b /\ c-> dc
+
+(*Q4 - si tous disent la vérité, qui est coupable? *)
+goal quest_4_1 :da /\ db /\ dc->(not a)
+goal quest_4_2 : da /\ db /\ dc->(not b)
+goal quest_4_3 :da /\ db /\ dc-> (not c)
+
+(*Q5-si seuls les innocents disent la vérité , qui est innocent ?*)
+goal quest_5_1 : (da -> a)/\(db -> b)/\(dc->c)->a
+goal quest_5_2 :(da -> a)/\(db -> b)/\(dc->c)->b
+goal quest_5_3 :(da -> a)/\(db -> b)/\(dc->c)->c
+                
+end
+

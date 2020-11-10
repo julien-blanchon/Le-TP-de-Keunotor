@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="5">
+<prover id="0" name="Coq" version="8.9.1" timelimit="0" steplimit="0" memlimit="0"/>
+<prover id="1" name="Alt-Ergo" version="2.0.0" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="2" name="Z3" version="4.4.1" timelimit="5" steplimit="0" memlimit="1000"/>
+<prover id="3" name="CVC4" version="1.5" timelimit="5" steplimit="0" memlimit="1000"/>
+<file proved="true">
+<path name=".."/>
+<path name="predicat.mlw"/>
+<theory name="Predicat" proved="true">
+ <goal name="THM08" proved="true">
+ <proof prover="0" edited="predicat_Predicat_THM08_1.v"><result status="valid" time="0.27"/></proof>
+ </goal>
+ <goal name="THM09" proved="true">
+ <proof prover="0" edited="predicat_Predicat_THM09_1.v"><result status="valid" time="0.24"/></proof>
+ <proof prover="1"><result status="unknown" time="0.00"/></proof>
+ <proof prover="3"><result status="unknown" time="0.00"/></proof>
+ </goal>
+ <goal name="THM10" proved="true">
+ <proof prover="2"><result status="valid" time="0.03"/></proof>
+ </goal>
+</theory>
+</file>
+</why3session>
