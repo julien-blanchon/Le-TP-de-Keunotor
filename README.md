@@ -38,37 +38,72 @@ remote: Total 436 (delta 97), reused 422 (delta 86), pack-reused 0
 Réception d'objets: 100% (436/436), 28.31 MiB | 9.16 MiB/s, fait.
 Résolution des deltas: 100% (97/97), fait.
 ```
+
 ### Mettre à jour le dépôt:
-Aprés avoir copier ou modifier un fichier ou un dossier dans `Le-TP-de-Keunotor` pour l'envoyer sur le dépôt il faut:
 
 ```git pull```
 
-Ajouter les modifications (ajout à l'**INDEX**)
+Synchronise votre dossier sur la derniere version de depo github.
+
+### Faire des ajouts:
+Aprés avoir copier ou modifier un fichier ou un dossier dans `Le-TP-de-Keunotor` pour l'envoyer sur le dépôt il faut:
+
+
+- Ajouter les modifications (ajout à l'**INDEX**)
 
 ```git add <filename>```
+
 ou plus simplement (pour enregistrer toute les modifications)
+
 ```git add --all```
 
-Valider les modifications (ajout à **HEAD**)
-```git commit -a -m "Message de validation"``` (la -a ajoute automatiquement les modifications)
+- Valider les modifications (ajout à **HEAD**)
 
-Envoyer les modifications (sur la branche principale)
+```git commit -a -m "Message de validation"``` 
+
+(la -a ajoute automatiquement les modifications)
+
+- Envoyer les modifications (sur la branche principale)
+
 ```git push```
+
 Normalement vous allez devoir donner vos identifiant github pour le push.
 
-Exemple
+Il est impossible de push si vous n'etes pas a jour sur le depo du serveur, si c'est le cas vous aller avoir une erreur.
+Il faut alors faire ```git pull``` (il va essayer de fusionner la mise a jour et vos modifications) puis ```git push```.
+
+- Exemple:
 ```console
 jblancho@keunotor:~/Le-TP-de-Keunotor$ cp -r ../1A/optimisation/tp1 optimisation/tp/
 jblancho@keunotor:~/Le-TP-de-Keunotor$ git add --all
+jblancho@keunotor:~/Le-TP-de-Keunotor$ git commit -a -m "Ajout TP1 d'opti"
+[main 36d85a0] Ajout TP1 d'opti
+ 16 files changed, 3963 insertions(+)
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants.zip
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/.Modelisation_C14.m.swp
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/.ipynb_checkpoints/TP1-checkpoint.ipynb
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/Algo_Gauss_Newton.m
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/Algo_Newton.m
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/C14_figures.png
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/C14_results.txt
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/H_residu_C14.m
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/Hess_f_C14.m
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/Hess_f_C14_bis.m
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/J_residu_C14.m
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/Modelisation_C14.m
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/TP1.ipynb
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/TP_Opti1A.pdf
+ create mode 100644 optimisation/tp/tp1/TP_Etudiants/residu_C14.m
+ create mode 100644 optimisation/tp/tp1/TP_JulienBlanchon.zip
 jblancho@keunotor:~/Le-TP-de-Keunotor$ git push
-Décompte des objets: 5, fait.
+Décompte des objets: 23, fait.
 Delta compression using up to 6 threads.
-Compression des objets: 100% (5/5), fait.
-Écriture des objets: 100% (5/5), 720 bytes | 720.00 KiB/s, fait.
-Total 5 (delta 2), reused 0 (delta 0)
-remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+Compression des objets: 100% (17/17), fait.
+Écriture des objets: 100% (23/23), 2.49 MiB | 3.64 MiB/s, fait.
+Total 23 (delta 5), reused 20 (delta 4)
+remote: Resolving deltas: 100% (5/5), completed with 1 local object.
 To https://github.com/julien-blanchon/Le-TP-de-Keunotor
-   05542ac..cca9d25  main -> main
+   2b5723f..36d85a0  main -> main
 ```
 
 
