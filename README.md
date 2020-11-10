@@ -1,5 +1,5 @@
 # Enseeiht_SN_GroupeB
-![Bidoof](https://img.pokemondb.net/sprites/black-white/anim/shiny/bidoof.gif =400x400)
+- ![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png =250x250)
 Dépot git communs pour les TDs et TPs du groupe B.
 
 ## Avancement des TPs
