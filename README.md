@@ -16,6 +16,7 @@ Dépot git communs pour les TDs et TPs du groupe B.
 	- :x: TP7
 - :white_check_mark: Probas 
 	- :white_check_mark: TP1
+	- :white_check_mark: TP2
 - :white_check_mark: Optimisation
 	- :white_check_mark: TP1
 
