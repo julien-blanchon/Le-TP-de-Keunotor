@@ -1,4 +1,5 @@
 *.ipynb linguist-documentation
+*.html linguist-documentation
 
 ###### Diff for texte file
 *.md diff=word
