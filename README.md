@@ -7,19 +7,19 @@ Dépot git communs pour les TDs et TPs du groupe B.
 
 # Avancement des TPs
 - :white_check_mark: Pim
-	- :white_check_mark: TD1
+  - :white_check_mark: TD1
   - :white_check_mark: TP1
-	- :white_check_mark: TD2
+  - :white_check_mark: TD2
   - :white_check_mark: TP2
-	- :white_check_mark: TD3
+  - :white_check_mark: TD3
   - :white_check_mark: TP3
-	- :white_check_mark: TD4
+  - :white_check_mark: TD4
   - :white_check_mark: TP4
-	- :white_check_mark: TD5
+  - :white_check_mark: TD5
   - :white_check_mark: TP5
-	- :white_check_mark: TD6
+  - :white_check_mark: TD6
   - :white_check_mark: TP6
-	- :white_check_mark: TD7
+  - :white_check_mark: TD7
   - :white_check_mark: TP7
   - :white_check_mark: TD8
   - :white_check_mark: TP8
