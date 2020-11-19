@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Méthode des raffinages</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Méthode des raffinages</h1>
+</header>
+<p>L’objectif de cette série d’exercices est de comprendre et savoir utiliser la méthode des raffinages.</p>
+<p>Ce travail se fera par équipes de 3 (éventuellement 4) étudiants avec d’abord un travail individuel puis un travail collectif. Votre travail devra être validé par votre enseignant.</p>
+<p>Le déroulement proposé est le suivant :</p>
+<ul>
+<li>(20’) : Produire un programme à partir de ses raffinages</li>
+<li>(20’) : Retrouver les raffinages d’un programme déjà écrit</li>
+<li>(60’) : Mettre en pratique la méthode des raffinages</li>
+<li>(optionnel) : Appliquer la méthode des raffinages pour trouver les nombres parfaits et les nombres parfaits</li>
+<li>(optionnel) : Expliquer comment concevoir un algorithme avec la méthode des raffinages</li>
+</ul>
+<p>L’outil PIXAL n’est pas adapté pour ce type d’exercice. Aussi, il ne sera utilisé que pour fournir l’énoncé des exercices. Nous utiliserons un document partagé (Google Doc) quand il s’agit d’écrire un raffinage (ou pour partager le résultat avec vos équipiers). Il doit être créé par l’un des membres de l’équipe. Il faudra le partager entre vous et avec votre enseignant qui doivent tous avoir le droit de modifier le document.</p>
+<p>Notons que pour le premier exercice (« Produire un programme à partir de ses raffinages ») et l’avant dernier (« Appliquer la méthode des raffinages sur les nombres amis et nombres parfaits »), il sera possible de valider le programme sur PIXAL d’un point de vue fonctionnel (est-ce que le programme affiche bien les résultats attendus) mais la partie « raffinages » sera validée via le document partagé.</p>
+<p>Les modalités de travail seront précisées dans les différents exercices.</p>
+</body>
+</html>

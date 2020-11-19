@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lire et écrire dans des bases différentes</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Lire et écrire dans des bases différentes</h1>
+</header>
+<h3 id="statement">Énoncé</h3>
+<p>On veut généraliser les deux sous-programmes pour lire et écrire un entier de manière à pouvoir choisir la base. Par exemple, on pourrait lire en base 16 l’entier FFFF qui correspond à 65535 en base 10 et l’écrire en base 2 : 1111111111111111.</p>
+<p>Il s’agit bien d’une généralisation : la base qui était fixée à 10 dans les exercices précédents devient maintenant un paramètre des sous-programmes et l’utilisateur de ces sous-programmes peut ainsi choisir sa valeur.</p>
+<p>Il faut un symbole pour représenter chaque valeur de 0 à Base - 1. Aussi aux 10 chiffres, nous ajouterons les 26 lettres majuscules ce qui nous permettra de traiter des bases de 2 à 36. Par exemple, en hexadécimale, base 16, on utilisera, en plus des chiffres, les lettres de A à F. A correspond à 10 et F à 15. Par exemple 2A est <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mn>16</mn><mo>+</mo><mn>10</mn><mo>*</mo><mn>1</mn><mo>=</mo><mn>42</mn></mrow><annotation encoding="application/x-tex">2*16 + 10*1 = 42</annotation></semantics></math> en décimal et s’écrit 52 en octal (base 8) : <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>*</mo><mn>8</mn><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">5*8 + 2</annotation></semantics></math>.</p>
+<p><strong>Conseil :</strong></p>
+<ul>
+<li>Ne pas hésiter à écrire des sous-programmes supplémentaires.</li>
+</ul>
+<h3 id="inputs">Entrée</h3>
+<ul>
+<li>la base de lecture, un entier saisi en base 10.</li>
+<li>l’entier lu dans la base de lecture</li>
+<li>la base d’écriture</li>
+</ul>
+<h3 id="outputs">Sortie</h3>
+<ul>
+<li>l’entier lu écrit en base 10</li>
+<li>l’entier lu écrit dans la base d’écriture</li>
+</ul>
+<h3 id="samples">Exemples</h3>
+<p>Voici quelques exemples d’utilisation</p>
+<pre><code class="noPrism">Base de l'entier lu : <mark><b>10</b></mark>
+Un entier (base 10) : <mark><b>421
+</b></mark>L'entier lu est (base 10) : 421
+Base pour écrire l'entier : <mark><b>10</b></mark>
+L'entier en base 10 est 421
+</code></pre>
+<pre><code class="noPrism">Base de l'entier lu : <mark><b>16</b></mark>
+Un entier (base 16) : <mark><b>2A
+</b></mark>L'entier lu est (base 10) : 42
+Base pour écrire l'entier : <mark><b>8</b></mark>
+L'entier en base 8 est 52
+</code></pre>
+<pre><code class="noPrism">Base de l'entier lu : <mark><b>8</b></mark>
+Un entier (base 8) : <mark><b>123
+</b></mark>L'entier lu est (base 10) : 83
+Base pour écrire l'entier : <mark><b>30</b></mark>
+L'entier en base 30 est 2N
+</code></pre>
+<h3 id="squelette">Squelette</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">with</span> Ada.Text_IO;          <span class="kw">use</span> Ada.Text_IO;</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">with</span> Ada.Integer_Text_IO;  <span class="kw">use</span> Ada.Integer_Text_IO;</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">procedure</span> Lire_Entier <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6">    Base_MAX : <span class="kw">constant</span> <span class="dt">Integer</span> := <span class="dv">10</span> + <span class="dv">26</span>; <span class="co">-- 10 chiffres (&#39;0&#39;..&#39;9&#39;) + 26 lettres (&#39;A&#39;..&#39;Z&#39;)</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="co">-- Est-ce que la base est valide ?</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="kw">function</span> Est_Base_Valide (Base : <span class="kw">in</span> <span class="dt">Integer</span>) <span class="kw">return</span> <span class="dt">Boolean</span> <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-12" title="12">        <span class="kw">return</span> <span class="dv">2</span> &lt;= Base <span class="kw">and</span> Base &lt;= Base_MAX;</a>
+<a class="sourceLine" id="cb1-13" title="13">    <span class="kw">end</span> Est_Base_Valide;</a>
+<a class="sourceLine" id="cb1-14" title="14"></a>
+<a class="sourceLine" id="cb1-15" title="15"></a>
+<a class="sourceLine" id="cb1-16" title="16">    <span class="co">-- Lire un entier au clavier dans la base considérée.</span></a>
+<a class="sourceLine" id="cb1-17" title="17">    <span class="kw">procedure</span> Lire (</a>
+<a class="sourceLine" id="cb1-18" title="18">        Nombre: <span class="kw">out</span> <span class="dt">Integer</span> ;   <span class="co">-- l&#39;entier lu au clavier</span></a>
+<a class="sourceLine" id="cb1-19" title="19">        Base: <span class="kw">in</span> <span class="dt">Integer</span> := <span class="dv">10</span>  <span class="co">-- la base à utiliser</span></a>
+<a class="sourceLine" id="cb1-20" title="20">    ) <span class="kw">with</span></a>
+<a class="sourceLine" id="cb1-21" title="21">        Pre =&gt; Est_Base_Valide (Base)</a>
+<a class="sourceLine" id="cb1-22" title="22">    <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-23" title="23">        ...</a>
+<a class="sourceLine" id="cb1-24" title="24">    <span class="kw">end</span> Lire;</a>
+<a class="sourceLine" id="cb1-25" title="25"></a>
+<a class="sourceLine" id="cb1-26" title="26"></a>
+<a class="sourceLine" id="cb1-27" title="27">    <span class="co">-- Écrire un entier dans une base donnée.</span></a>
+<a class="sourceLine" id="cb1-28" title="28">    <span class="kw">procedure</span> Ecrire (</a>
+<a class="sourceLine" id="cb1-29" title="29">        Nombre: <span class="kw">in</span> <span class="dt">Integer</span> ;    <span class="co">-- l&#39;entier à écrire</span></a>
+<a class="sourceLine" id="cb1-30" title="30">        Base : <span class="kw">in</span> <span class="dt">Integer</span>       <span class="co">-- la base à utliser</span></a>
+<a class="sourceLine" id="cb1-31" title="31">    ) <span class="kw">with</span></a>
+<a class="sourceLine" id="cb1-32" title="32">        Pre =&gt; Est_Base_Valide (Base)</a>
+<a class="sourceLine" id="cb1-33" title="33">                <span class="kw">and</span> Nombre &gt;= <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-34" title="34">    <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-35" title="35">        ...</a>
+<a class="sourceLine" id="cb1-36" title="36">    <span class="kw">end</span> Ecrire;</a>
+<a class="sourceLine" id="cb1-37" title="37"></a>
+<a class="sourceLine" id="cb1-38" title="38"></a>
+<a class="sourceLine" id="cb1-39" title="39">    Base_Lecture: <span class="dt">Integer</span>;  <span class="co">-- la base de l&#39;entier lu</span></a>
+<a class="sourceLine" id="cb1-40" title="40">    Base_Ecriture: <span class="dt">Integer</span>; <span class="co">-- la base de l&#39;entier écrit</span></a>
+<a class="sourceLine" id="cb1-41" title="41">    Un_Entier: <span class="dt">Integer</span>;     <span class="co">-- un entier lu au clavier</span></a>
+<a class="sourceLine" id="cb1-42" title="42"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-43" title="43">    <span class="co">-- Demander la base de lecture</span></a>
+<a class="sourceLine" id="cb1-44" title="44">    Put (<span class="st">&quot;Base de l&#39;entier lu : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-45" title="45">    Get (Base_Lecture);</a>
+<a class="sourceLine" id="cb1-46" title="46">    Skip_Line;</a>
+<a class="sourceLine" id="cb1-47" title="47"></a>
+<a class="sourceLine" id="cb1-48" title="48">    <span class="co">-- Demander un entier</span></a>
+<a class="sourceLine" id="cb1-49" title="49">    Put (<span class="st">&quot;Un entier (base &quot;</span>);</a>
+<a class="sourceLine" id="cb1-50" title="50">    Put (Base_Lecture, <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb1-51" title="51">    Put (<span class="st">&quot;) : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-52" title="52">    Lire (Un_Entier, Base_Lecture);</a>
+<a class="sourceLine" id="cb1-53" title="53"></a>
+<a class="sourceLine" id="cb1-54" title="54">    <span class="co">-- Afficher l&#39;entier lu en base 10</span></a>
+<a class="sourceLine" id="cb1-55" title="55">    Put (<span class="st">&quot;L&#39;entier lu est (base 10) : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-56" title="56">    Put (Un_Entier, <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb1-57" title="57">    New_Line;</a>
+<a class="sourceLine" id="cb1-58" title="58"></a>
+<a class="sourceLine" id="cb1-59" title="59">    <span class="co">-- Demander la base d&#39;écriture</span></a>
+<a class="sourceLine" id="cb1-60" title="60">    Put (<span class="st">&quot;Base pour écrire l&#39;entier : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-61" title="61">    Get (Base_Ecriture);</a>
+<a class="sourceLine" id="cb1-62" title="62">    Skip_Line;</a>
+<a class="sourceLine" id="cb1-63" title="63"></a>
+<a class="sourceLine" id="cb1-64" title="64">    <span class="co">-- Afficher l&#39;entier lu dans la base d&#39;écriture</span></a>
+<a class="sourceLine" id="cb1-65" title="65">    Put (<span class="st">&quot;L&#39;entier en base &quot;</span>);</a>
+<a class="sourceLine" id="cb1-66" title="66">    Put (Base_Ecriture, <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb1-67" title="67">    Put (<span class="st">&quot; est &quot;</span>);</a>
+<a class="sourceLine" id="cb1-68" title="68">    Ecrire (Un_Entier, Base_Ecriture);</a>
+<a class="sourceLine" id="cb1-69" title="69">    New_Line;</a>
+<a class="sourceLine" id="cb1-70" title="70"></a>
+<a class="sourceLine" id="cb1-71" title="71">    <span class="co">-- Remarque : on aurait pu utiliser les sous-programme Lire pour lire</span></a>
+<a class="sourceLine" id="cb1-72" title="72">    <span class="co">-- les bases et Ecrire pour les écrire en base 10.  Nous utilisons les</span></a>
+<a class="sourceLine" id="cb1-73" title="73">    <span class="co">-- Get et Put d&#39;Ada pour faciliter le test du programme.</span></a>
+<a class="sourceLine" id="cb1-74" title="74"><span class="kw">end</span> Lire_Entier;</a></code></pre></div>
+</body>
+</html>

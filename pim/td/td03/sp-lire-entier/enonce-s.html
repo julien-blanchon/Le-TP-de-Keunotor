@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lire un entier au clavier</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Lire un entier au clavier</h1>
+</header>
+<h3 id="statement">Énoncé</h3>
+<p>Écrire un sous-programme qui permet de lire au clavier un entier en n’utilisant que la lecture d’un caractère. Nous refaisons l’équivalent de <code>Get (Integer)</code> d’ Ada. On se limitera aux entiers positifs.</p>
+<p><strong>Contrainte :</strong></p>
+<ul>
+<li>On n’utilisera que la lecture d’un caractère, <code>Get (Character)</code>.</li>
+</ul>
+<p><strong>Indications :</strong></p>
+<ol type="1">
+<li><p>On utilisera <code>Look_Ahead</code> pour vérifier si le caractère suivant est un chiffre du nombre à lire ou non. L’intérêt de cette procédure est que le caractère n’est pas consommé. Ainsi, s’il ne fait pas partie du nombre, on pourra le laisser pour une prochaine lecture. Si c’est un chiffre, il fait partie du nombre et il peut donc être lu avec <code>Get</code> et exploité pour produire le nombre. Voici la <a href="http://www.ada-auth.org/standards/rm12_w_tc1/html/RM-A-10-7.html#p8">documentation de cette procédure</a></p>
+<blockquote>
+<pre><code>procedure Look_Ahead (Item        : out Character;
+                      End_Of_Line : out Boolean);</code></pre>
+<p>Sets End_Of_Line to True if at end of line, including if at end of page or at end of file; in each of these cases the value of Item is not specified. Otherwise, End_Of_Line is set to False and Item is set to the next character (without consuming it) from the file.</p>
+</blockquote></li>
+<li>On peut passer des caractères au entiers et inversement avec <code>Ord</code> et <code>Chr</code> en Algorithmique.</li>
+<li>En Ada, l’équivalent de <code>Ord</code> est <code>Character'Pos</code> et l’équivalent de <code>Chr</code> est <code>Character'Val</code>.</li>
+<li>Les caractères correspondant aux chiffres (<code>'0'</code>, <code>'1'</code>, …, <code>'9'</code>) sont consécutifs, ainsi les deux fonctions précédentes permettent de retrouver l’entier qui correspond à un chiffre (de type <code>Character</code>) :
+<ul>
+<li>En algorithmique : <code>Ord(Chiffre) - Ord('0')</code></li>
+<li>En Ada : <code class="sourceCode ada">Character&#39;Pos(Chiffre) - Character&#39;Pos(<span class="ch">&#39;0&#39;</span>)</code></li>
+</ul></li>
+<li>On appliquera le schéma de Horner. Son principe est le suivant, illustré avec le nombre 421.
+<ul>
+<li>421 peut s’écrire <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>*</mo><msup><mn>10</mn><mn>2</mn></msup><mo>+</mo><mn>2</mn><mo>*</mo><msup><mn>10</mn><mn>1</mn></msup><mo>+</mo><mn>1</mn><mo>*</mo><msup><mn>10</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">4 * 10^2 + 2*10^1 + 1*10^0</annotation></semantics></math>, i.e. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>*</mo><mn>100</mn><mo>+</mo><mn>2</mn><mo>*</mo><mn>10</mn><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">4*100 + 2*10 + 1</annotation></semantics></math></li>
+<li>Le schéma de Horner consiste à l’écrire ainsi : <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>421</mn><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mn>4</mn><mo>*</mo><mn>10</mn><mo>+</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>*</mo><mn>10</mn><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">421 = ((4*10 + 2)*10 + 1)</annotation></semantics></math></li>
+</ul></li>
+<li>Voyons comment utiliser le schéma de Horner si on suppoe que l’utilisateur saisit ‘421’.
+<ul>
+<li>Au départ, on suppose que le Nombre est 0 (pas encore de chiffre traité)</li>
+<li>On lit le premier caractère ‘4’, on peut donc retrouver le chiffre correspondant 4 et le prendre en compte pour Nombre : <code>Nombre := Nombre * 10 + 4</code>, donc 4.</li>
+<li>Pour le deuxième caractère ‘2’, on obtient le chiffre 2 et Nombre devient 42 (4 * 10 + 2)</li>
+<li>Pour le troisième caractère ‘1’, on obtient le chiffre 1 et Nombre devient 421 (42 * 10 + 1)</li>
+<li>Le caractère suivant n’est pas un chiffre (ici un retour à la ligne). On a donc terminé : le nombre est 421</li>
+</ul></li>
+<li><p>Il faut utiliser la méthode des raffinages !</p></li>
+</ol>
+<h3 id="inputs">Entrée</h3>
+<p>les caractères qui constituent un entier (des chiffres, donc)</p>
+<h3 id="outputs">Sortie</h3>
+<p>nombre: entier, l’entier correspondant aux caractères saisis.</p>
+<h3 id="samples">Exemples</h3>
+<pre><code>caractères  -&gt;  nombres
+--------------------------------------------------------------------
+421         -&gt;  421     -- plusieurs chiffres constituent le nombre
+1           -&gt;  1       -- un seul chiffre
+0           -&gt;  0       --    &quot;      &quot;
+12300       -&gt;  12300   -- avec des 0 à la fin
+10001       -&gt;  10001   -- avec des 0 au milieu
+645x        -&gt;  645     -- on s&#39;arrête sur le dernier chiffre
+dix         -&gt;  0       -- pas de chiffres
+123456789   -&gt;  123456789     -- beaucoup de chiffres
+1234567890  -&gt;  1234567890    -- nombre maximal de chiffres pour les Integer d&#39;Ada
+2147483647  -&gt;  2147483647    -- le plus grand des entiers (Integer&#39;LAST)</code></pre>
+<h3 id="squelette">Squelette</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">with</span> Ada.Text_IO;          <span class="kw">use</span> Ada.Text_IO;</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">with</span> Ada.Integer_Text_IO;  <span class="kw">use</span> Ada.Integer_Text_IO;</a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="kw">procedure</span> Lire_Entier <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="co">-- Lire un entier au clavier.</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="co">-- Paramètres :</span></a>
+<a class="sourceLine" id="cb3-8" title="8">    <span class="co">--    Nombre : l&#39;entier à lire</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="co">-- Nécessite : ---</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="co">-- Assure : -- Nombre est l&#39;entier lu</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="kw">procedure</span> Lire (Nombre: <span class="kw">out</span> <span class="dt">Integer</span>) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-12" title="12">        ...</a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="kw">end</span> Lire;</a>
+<a class="sourceLine" id="cb3-14" title="14"></a>
+<a class="sourceLine" id="cb3-15" title="15"></a>
+<a class="sourceLine" id="cb3-16" title="16">    Un_Entier: <span class="dt">Integer</span>;     <span class="co">-- lu au clavier</span></a>
+<a class="sourceLine" id="cb3-17" title="17">    Suivant: <span class="dt">Character</span>;     <span class="co">-- lu au clavier</span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb3-19" title="19">    <span class="co">-- Demander un entier</span></a>
+<a class="sourceLine" id="cb3-20" title="20">    Put (<span class="st">&quot;Un entier : &quot;</span>);</a>
+<a class="sourceLine" id="cb3-21" title="21">    <span class="co">-- TODO: Appeler le sous-programme Lire</span></a>
+<a class="sourceLine" id="cb3-22" title="22"></a>
+<a class="sourceLine" id="cb3-23" title="23">    <span class="co">-- Afficher l&#39;entier lu</span></a>
+<a class="sourceLine" id="cb3-24" title="24">    Put (<span class="st">&quot;L&#39;entier lu est : &quot;</span>);</a>
+<a class="sourceLine" id="cb3-25" title="25">    Put (Un_Entier, <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb3-26" title="26">    New_Line;</a>
+<a class="sourceLine" id="cb3-27" title="27"></a>
+<a class="sourceLine" id="cb3-28" title="28">    <span class="co">-- Afficher le caractère suivant</span></a>
+<a class="sourceLine" id="cb3-29" title="29">    Get (Suivant);</a>
+<a class="sourceLine" id="cb3-30" title="30">    Put (<span class="st">&quot;Le caractère suivant est : &quot;</span>);</a>
+<a class="sourceLine" id="cb3-31" title="31">    Put (Suivant);</a>
+<a class="sourceLine" id="cb3-32" title="32">    New_Line;</a>
+<a class="sourceLine" id="cb3-33" title="33"></a>
+<a class="sourceLine" id="cb3-34" title="34"><span class="kw">end</span> Lire_Entier;</a></code></pre></div>
+</body>
+</html>

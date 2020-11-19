@@ -1,0 +1,136 @@
+with Ada.Unchecked_Deallocation;
+
+package body LCA is
+
+	procedure Free is
+		new Ada.Unchecked_Deallocation (Object => T_Cellule, Name => T_LCA);
+
+
+	procedure Initialiser(Sda: out T_LCA) is
+	begin
+		Sda := Null;
+	end Initialiser;
+
+
+	function Est_Vide (Sda : T_LCA) return Boolean is
+	begin
+		if Sda=Null then
+			return True;
+		else
+			return False;
+		end if;
+	end;
+
+
+	function Taille (Sda : in T_LCA) return Integer is
+		Compteur : Integer := 0;
+		Curseur : T_LCA;
+	begin
+		if Sda=Null then
+			Compteur := 0;
+		else
+			Curseur := Sda;
+			loop
+				Compteur := Compteur+1;
+				Curseur := Curseur.All.Suivant;
+			exit when Curseur=Null;
+			end loop;
+		end if;
+		return Compteur;
+
+	end Taille;
+
+
+	procedure Enregistrer (Sda : in out T_LCA ; Cle : in T_Cle ; Donnee : in T_Donnee) is
+	begin
+		if Sda=Null then
+			Sda := New T_Cellule'(Cle, Donnee, Null);
+			--Cas terminal: La cle n'est pas présente.
+		else
+			if Sda.All.Cle=Cle then
+				Sda.All.Donnee := Donnee;
+				--Cas terminal: La cle est présente.
+			else
+				Enregistrer(Sda.All.Suivant, Cle, Donnee);
+				--Cas récurcifs on passe a l'element suivant.
+			end if;
+		end if;
+	end Enregistrer;
+
+
+	function Cle_Presente (Sda : in T_LCA ; Cle : in T_Cle) return Boolean is
+	begin
+		if Sda=Null then
+			return False;
+			--Cas terminal: La cle n'est pas présente.
+		else
+			if Sda.All.Cle = Cle then
+				return True;
+				--Cas terminal: La cle est présente.
+			else
+				return Cle_Presente(Sda.All.Suivant, Cle);
+				--Cas récurcifs on passe a l'element suivant.
+			end if;
+		end if;
+	end;
+
+
+	function La_Donnee (Sda : in T_LCA ; Cle : in T_Cle) return T_Donnee is
+	begin
+		if Sda=Null then
+			raise Cle_Absente_Exception;
+			--Cas terminal: La cle n'est pas présente.
+		else
+			if Sda.All.Cle = Cle then
+				return Sda.All.Donnee;
+				--Cas terminal: La cle est présente.
+			else
+				return La_Donnee(Sda.All.Suivant, Cle);
+				--Cas récurcifs on passe a l'element suivant.
+			end if;
+		end if;
+	end La_Donnee;
+
+	procedure Supprimer (Sda : in out T_LCA ; Cle : in T_Cle) is
+		Sda_copy : T_LCA;
+	begin
+		if Sda=Null then
+			raise Cle_Absente_Exception;
+			--Cas terminal: La cle n'est pas présente.
+		else
+			if Sda.All.Cle = Cle then
+				Sda_copy := Sda;
+				Sda := Sda.All.Suivant;
+				Free(Sda_copy);
+				--Cas terminal: La cle est présente.
+			else
+				Supprimer(Sda.All.Suivant, Cle);
+				--Cas récurcifs on passe a l'element suivant.
+			end if;
+		end if;
+	end Supprimer;
+
+
+	procedure Vider(Sda : in out T_LCA) is
+	begin
+		if Sda=Null then
+			Null;
+		else
+			Vider(Sda.all.Suivant);
+			Free(Sda);
+		end if;
+	end Vider;
+
+
+	procedure Pour_Chaque (Sda : in T_LCA) is
+	begin
+		if Sda=Null then
+			Null;
+		else
+			Traiter(Sda.All.Cle, Sda.All.Donnee);
+			Pour_Chaque(Sda.All.Suivant);
+		end if;
+	end Pour_Chaque;
+
+
+end LCA;

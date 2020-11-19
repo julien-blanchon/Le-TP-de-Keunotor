@@ -6,7 +6,27 @@
 Dépot git communs pour les TDs et TPs du groupe B.
 
 # Avancement des TPs
-- :x: Modelisation 
+- :white_check_mark: Pim
+	- :white_check_mark: TD1
+  - :white_check_mark: TP1
+	- :white_check_mark: TD2
+  - :white_check_mark: TP2
+	- :white_check_mark: TD3
+  - :white_check_mark: TP3
+	- :white_check_mark: TD4
+  - :white_check_mark: TP4
+	- :white_check_mark: TD5
+  - :white_check_mark: TP5
+	- :white_check_mark: TD6
+  - :white_check_mark: TP6
+	- :white_check_mark: TD7
+  - :white_check_mark: TP7
+  - :white_check_mark: TD8
+  - :white_check_mark: TP8
+  - :white_check_mark: TD9
+  - :white_check_mark: TP9
+  - :white_check_mark: TP10
+- :x: Modelisation
 	- :x: TP1
 	- :x: TP2
 	- :x: TP3
@@ -14,9 +34,10 @@ Dépot git communs pour les TDs et TPs du groupe B.
 	- :x: TP5
 	- :x: TP6
 	- :x: TP7
-- :white_check_mark: Probas 
+- :white_check_mark: Probas
 	- :white_check_mark: TP1
 	- :white_check_mark: TP2
+  - :white_check_mark: TP3
 - :white_check_mark: Optimisation
 	- :white_check_mark: TP1
 
@@ -60,7 +81,7 @@ ou plus simplement (pour enregistrer toute les modifications)
 
 - Valider les modifications (ajout à **HEAD**)
 
-```git commit -a -m "Message de validation"``` 
+```git commit -a -m "Message de validation"```
 
 (la -a ajoute automatiquement les modifications)
 
@@ -106,6 +127,3 @@ remote: Resolving deltas: 100% (5/5), completed with 1 local object.
 To https://github.com/julien-blanchon/Le-TP-de-Keunotor
    2b5723f..36d85a0  main -> main
 ```
-
-
-

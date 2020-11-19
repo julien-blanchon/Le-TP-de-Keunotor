@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Réécrire un Répéter avec un TantQue</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Réécrire un Répéter avec un TantQue</h1>
+</header>
+<h3 id="statement">Énoncé</h3>
+<p>Réécrire un <code>Répéter</code> avec un <code>TantQue</code>.</p>
+<p>Dans le programme, nous utilisons <code>Condition</code> et <code>Sequence</code> pour avoir une formulation générale du <code>Répéter</code> et pouvoir détecter des erreurs dans la réécriture avec un <code>TantQue</code>. Ces deux éléments sont définis dans l’encadré en s’appuyant sur les notions de sous-programme et de module qui seront vues plus tard dans le cours. Inutile de lire cet encadré et encore moins de le comprendre.</p>
+<p>Chaque évaluation de <code>Condition</code> retourne vrai ou faux en fonction du test en cours d’exécution.</p>
+<p>Chaque exécution de <code>Sequence</code> écrit le nombre de fois où <code>Sequence</code> a été appelée.</p>
+<p><strong>Remarque :</strong> On notera que la version initiale avec un <code>Répéter</code> est plus élégante. Aussi, si on est amené à écrire la version <code>TantQue</code>, il faudrait la réécrire avec un <code>Répéter</code>.</p>
+<h3 id="inputs">Entrées</h3>
+<pre><code>condition, un booléen qui correspond à la valeur de condition.</code></pre>
+<h3 id="outputs">Sortie</h3>
+<pre><code>des entiers en commençant par 1 pour chaque exécution de Sequence</code></pre>
+<h3 id="samples">Exemples</h3>
+<pre><code>Conditions       --&gt; Affichage
+------------------------------
+True             --&gt;  1
+False True       --&gt;  1
+                      2
+False False True --&gt;  1
+                      2
+                      3</code></pre>
+<h3 id="squelette">Squelette</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">with</span> Ada.Text_IO;          <span class="kw">use</span> Ada.Text_IO;</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">with</span> Ada.Integer_Text_IO;  <span class="kw">use</span> Ada.Integer_Text_IO;</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">procedure</span> Repeter_TantQue <span class="kw">is</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="co">--------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="co">--  Cette partie définit l&#39;expression Condition et l&#39;instruction Séquence     --</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="co">--  INUTILE DE LIRE CETTE PARTIE                                              --</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="co">--------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb4-10" title="10">                                                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="kw">package</span> Instrumentation <span class="kw">is</span>                                                    <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-12" title="12">        <span class="kw">function</span> Condition <span class="kw">return</span> <span class="dt">Boolean</span>;                                        <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-13" title="13">        <span class="kw">procedure</span> Sequence;                                                       <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-14" title="14">    <span class="kw">private</span>                                                                       <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-15" title="15">        Dernier: <span class="dt">Integer</span> := <span class="dv">0</span>;                                                    <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-16" title="16">    <span class="kw">end</span> Instrumentation;                                                          <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-17" title="17">                                                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-18" title="18">    <span class="kw">package</span> <span class="kw">body</span> Instrumentation <span class="kw">is</span>                                               <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-19" title="19">                                                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-20" title="20">        <span class="kw">function</span> Condition <span class="kw">return</span> <span class="dt">Boolean</span> <span class="kw">is</span>                                      <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-21" title="21">                Valeur: <span class="dt">Integer</span>;                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-22" title="22">            <span class="kw">begin</span>                                                                 <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-23" title="23">                Get (Valeur);                                                     <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-24" title="24">                <span class="kw">return</span> Valeur &gt; <span class="dv">0</span>;                                                <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-25" title="25">            <span class="kw">end</span>;                                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-26" title="26">                                                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-27" title="27">        <span class="kw">procedure</span> Sequence <span class="kw">is</span>                                                     <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-28" title="28">            <span class="kw">begin</span>                                                                 <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-29" title="29">                Dernier := Dernier + <span class="dv">1</span>;                                           <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-30" title="30">                Put (Dernier);                                                    <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-31" title="31">                New_Line;                                                         <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-32" title="32">            <span class="kw">end</span>;                                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-33" title="33">                                                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-34" title="34">    <span class="kw">end</span> Instrumentation;                                                          <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-35" title="35">                                                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-36" title="36">    <span class="kw">use</span> Instrumentation;                                                          <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-37" title="37">                                                                                  <span class="co">--</span></a>
+<a class="sourceLine" id="cb4-38" title="38">    <span class="co">--------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb4-39" title="39"></a>
+<a class="sourceLine" id="cb4-40" title="40"></a>
+<a class="sourceLine" id="cb4-41" title="41"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb4-42" title="42">    <span class="co">-- Voici le Répéter à réécrire avec un TantQue</span></a>
+<a class="sourceLine" id="cb4-43" title="43">    <span class="kw">loop</span></a>
+<a class="sourceLine" id="cb4-44" title="44">        Sequence;</a>
+<a class="sourceLine" id="cb4-45" title="45">    <span class="kw">exit</span> <span class="kw">when</span> Condition;</a>
+<a class="sourceLine" id="cb4-46" title="46">    <span class="kw">end loop</span>;</a>
+<a class="sourceLine" id="cb4-47" title="47"><span class="kw">end</span> Repeter_TantQue;</a></code></pre></div>
+</body>
+</html>

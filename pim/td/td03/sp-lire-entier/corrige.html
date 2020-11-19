@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="" />
+  <title>Lire un entier au clavier : Corrigé possible</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Lire un entier au clavier : Corrigé possible</h1>
+<p class="author"></p>
+</header>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">with</span> Ada.Text_IO;          <span class="kw">use</span> Ada.Text_IO;</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">with</span> Ada.Integer_Text_IO;  <span class="kw">use</span> Ada.Integer_Text_IO;</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">procedure</span> Lire_Entier <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="co">-- Lire un entier au clavier.</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="co">-- Paramètres :</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="co">--    Nombre : l&#39;entier à lire</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="co">-- Nécessite : ---</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="co">-- Assure : -- Nombre est l&#39;entier lu</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="kw">procedure</span> Lire (Nombre: <span class="kw">out</span> <span class="dt">Integer</span>) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-12" title="12">        Caractere_Lu: <span class="dt">Character</span>;  <span class="co">-- un caractère lu au clavier</span></a>
+<a class="sourceLine" id="cb1-13" title="13">        Nombre_Lu: <span class="dt">Integer</span>;       <span class="co">-- le nombre correspondant aux caractères lus</span></a>
+<a class="sourceLine" id="cb1-14" title="14">            <span class="co">-- Nombre_Lu est important pour ne pas modifer Nombre (le paramètre formel)</span></a>
+<a class="sourceLine" id="cb1-15" title="15">            <span class="co">-- tant qu&#39;on n&#39;est pas sûr qu&#39;on a réussi à le produire complètement;</span></a>
+<a class="sourceLine" id="cb1-16" title="16">            <span class="co">-- par exemple si une exception se produit en cours de traitement.</span></a>
+<a class="sourceLine" id="cb1-17" title="17">        Chiffre: <span class="dt">Integer</span>;         <span class="co">-- le chiffre correspondant à caractère</span></a>
+<a class="sourceLine" id="cb1-18" title="18">        Fin_De_Ligne: <span class="dt">Boolean</span>;     <span class="co">-- Est-ce que la fin de ligne a été trouvée ?</span></a>
+<a class="sourceLine" id="cb1-19" title="19">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-20" title="20">        Nombre_Lu := <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb1-21" title="21"></a>
+<a class="sourceLine" id="cb1-22" title="22">        <span class="co">-- Consulter le caractère suivant</span></a>
+<a class="sourceLine" id="cb1-23" title="23">        Look_Ahead (Caractere_Lu, Fin_De_Ligne);</a>
+<a class="sourceLine" id="cb1-24" title="24"></a>
+<a class="sourceLine" id="cb1-25" title="25">        <span class="kw">while</span> <span class="kw">not</span> Fin_De_Ligne <span class="kw">and</span> <span class="kw">then</span>     <span class="co">--! and then car Caractere_Lu n&#39;a de valeur</span></a>
+<a class="sourceLine" id="cb1-26" title="26">                                            <span class="co">--! que si Fin_De_Ligne est faux.</span></a>
+<a class="sourceLine" id="cb1-27" title="27">            (<span class="ch">&#39;0&#39;</span> &lt;= Caractere_Lu <span class="kw">and</span> Caractere_Lu &lt;= <span class="ch">&#39;9&#39;</span>) <span class="co">-- Caractere_Lu est un chiffre</span></a>
+<a class="sourceLine" id="cb1-28" title="28">        <span class="kw">loop</span></a>
+<a class="sourceLine" id="cb1-29" title="29">            <span class="co">-- convertir le caractère en chiffre</span></a>
+<a class="sourceLine" id="cb1-30" title="30">            Chiffre := Character&#39;Pos (Caractere_Lu) - Character&#39;Pos (<span class="ch">&#39;0&#39;</span>);</a>
+<a class="sourceLine" id="cb1-31" title="31"></a>
+<a class="sourceLine" id="cb1-32" title="32">            <span class="co">-- exploiter ce chiffre pour compléter Nombre_Lu (Horner)</span></a>
+<a class="sourceLine" id="cb1-33" title="33">            Nombre_Lu := Nombre_Lu * <span class="dv">10</span> + Chiffre;</a>
+<a class="sourceLine" id="cb1-34" title="34"></a>
+<a class="sourceLine" id="cb1-35" title="35">            <span class="co">-- Consommer le caractère traité</span></a>
+<a class="sourceLine" id="cb1-36" title="36">            Get (Caractere_Lu);</a>
+<a class="sourceLine" id="cb1-37" title="37"></a>
+<a class="sourceLine" id="cb1-38" title="38">            <span class="co">-- Consulter le caractère suivant</span></a>
+<a class="sourceLine" id="cb1-39" title="39">            Look_Ahead (Caractere_Lu, Fin_De_Ligne);</a>
+<a class="sourceLine" id="cb1-40" title="40">        <span class="kw">end loop</span>;</a>
+<a class="sourceLine" id="cb1-41" title="41">        Nombre := Nombre_Lu;</a>
+<a class="sourceLine" id="cb1-42" title="42">    <span class="kw">end</span> Lire;</a>
+<a class="sourceLine" id="cb1-43" title="43"></a>
+<a class="sourceLine" id="cb1-44" title="44"></a>
+<a class="sourceLine" id="cb1-45" title="45">    Un_Entier: <span class="dt">Integer</span>;     <span class="co">-- lu au clavier</span></a>
+<a class="sourceLine" id="cb1-46" title="46">    Suivant: <span class="dt">Character</span>;     <span class="co">-- lu au clavier</span></a>
+<a class="sourceLine" id="cb1-47" title="47"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-48" title="48">    <span class="co">-- Demander un entier</span></a>
+<a class="sourceLine" id="cb1-49" title="49">    Put (<span class="st">&quot;Un entier : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-50" title="50">    Lire (Un_Entier);</a>
+<a class="sourceLine" id="cb1-51" title="51"></a>
+<a class="sourceLine" id="cb1-52" title="52">    <span class="co">-- Afficher l&#39;entier lu</span></a>
+<a class="sourceLine" id="cb1-53" title="53">    Put (<span class="st">&quot;L&#39;entier lu est : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-54" title="54">    Put (Un_Entier, <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb1-55" title="55">    New_Line;</a>
+<a class="sourceLine" id="cb1-56" title="56"></a>
+<a class="sourceLine" id="cb1-57" title="57">    <span class="co">-- Afficher le caractère suivant</span></a>
+<a class="sourceLine" id="cb1-58" title="58">    Get (Suivant);</a>
+<a class="sourceLine" id="cb1-59" title="59">    Put (<span class="st">&quot;Le caractère suivant est : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-60" title="60">    Put (Suivant);</a>
+<a class="sourceLine" id="cb1-61" title="61">    New_Line;</a>
+<a class="sourceLine" id="cb1-62" title="62"></a>
+<a class="sourceLine" id="cb1-63" title="63"><span class="kw">end</span> Lire_Entier;</a></code></pre></div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="" />
+  <title>Spécifier des sous-programmes : Corrigé possible</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Spécifier des sous-programmes : Corrigé possible</h1>
+<p class="author"></p>
+</header>
+<pre class="raff"><code>procedure Specifications is
+
+    -- Retourner la puissance entière d&#39;un réel.
+    -- Paramètres :
+    --     Nombre: in Float     -- le nombre réel
+    --     Exposant: in Integer -- l&#39;exposant
+    -- Résultat : Réel  -- Nombre à la puissance Exposant
+    -- Nécessite :
+    --     (Exposant &gt;= 0) Ou (Nombre /= 0)     -- pas de division par zéro
+    -- Assure
+    --     Résultat == Nombre ** Exposant à epsilon près
+    function Puissance (Nombre: in Float; Exposant: in Integer) return Float;
+
+
+    -- Saisir un entier au clavier
+    -- Paramètres :
+    --    Nombre: out Integer   -- l&#39;entier à saisir
+    -- Nécessite : ---
+    -- Assure : -- Nombre est l&#39;entier saisi
+    procedure Saisir(Nombre: out Integer);
+
+
+    -- Est-ce qu&#39;une année est bissextile ?
+    -- Paramètres
+    --    Année : in Integer -- l&#39;année à analyser
+    -- Résultat : Booléan  -- Vrai ssi Année est bissextile
+    -- Nécessite
+    -- Assure
+    --      Résultat = (Année Mod 4 = 0) Et ((Année Mod 100 /= 0) Ou (Année Mod 400 = 0))
+    function Est_Bissextile(Annee: in Integer) return Boolean;
+
+
+    -- Calculer le pgcd de deux entiers strictement positifs.
+    -- Paramètre
+    --  A, B : in Integer   -- deux entiers &gt; 0
+    -- Résultat : Integer   -- le pgcd de A et B
+    -- Nécessite :
+    --      A &gt; 0;
+    --      B &gt; 0;
+    -- Assure :
+    --      Résultat &gt; 0;       -- le pgcd est positif
+    --      A mod Résultat = 0  -- le résultat divise A
+    --      B mod Résultat = 0  -- le résultat divise B
+    --      -- Résultat est le plus grand diviseur de A et B
+    function Pgcd (A, B: in Integer) return Integer;
+
+    -- Remarque : nous avons respecté les précondition de l&#39;énoncé mais nous
+    -- pourrions les diminuer. Il faut alors préciser ce que serait le pgcd.
+    -- Si A et B non nuls, on peut prendre Pgcd (A, B) = Pgcd ( Abs (A), Abs (B))
+    -- Si A est nul, le Pgcd est B (et inversement).
+
+
+    -- Calculer le quotient et le reste de la division entière d&#39;un dividende par un diviseur
+    -- Paramètres
+    --   Dividende: in Integer
+    --   Diviseur: in Integer
+    --   Quotient: out Integer
+    --   Reste: out Integer
+    -- Nécessite :
+    --   Dividende &gt;= 0
+    --   Diviseur &gt; 0
+    -- Assure
+    --   Dividende = Quotient * Diviseur + Reste
+    --   0 &lt;= Reste ET Reste &lt; Diviseur
+    procedure Calculer_Quotient_Reste (Dividende, Diviseur : in Integer;
+                                       Quotient, Reste : out Integer);
+
+    -- Remarque : on en fait une procédure car on a deux paramètres en out.  On
+    -- pourrait en faire une fonction si on avait un moyen facile de renvoyer
+    -- deux valeurs (comme les n-uplets de Python).   On verra plus tard les
+    -- types enregistrements ou les tableaux mais ils resteront trop lourds à
+    -- utiliser dans ce contexte.
+
+
+    -- Saisir un entier au clavier, entier qui doit être compris entre Inf et Sup inclus.
+    -- Une consigne est affiché à l&#39;utilisateur avant la saisie.  En cas de saisie incorrecte,
+    -- une explication est affiché à l&#39;utilisateur et une nouvelle saisie a lieu.
+    -- Paramètres
+    --   Inf, Sup : in Integer  -- Bornes entre lesquelles doit se trouver l&#39;entier saisi
+    --   Consigne : in String   -- Le message à afficher à l&#39;utilisateur
+    --   Nombre : out Integer   -- L&#39;entier saisi
+    -- Nécessite
+    --   Inf &lt; Sup  -- au moins deux éléments possibles
+    -- Assure
+    --   Inf &lt;= Nombre &lt;= Sup
+    procedure Saisir (Entier: out Integer ; Inf, Sup : in Integer; Consigne: in String);
+
+    -- Remarque : On a un seul paramètre en sorte et les autres paramètres en
+    -- in.  On pourrait penser que les conditions sont remplis sont remplis
+    -- pour en faire une fonction.   Ce n&#39;est pourtant pas le cas car ce sous
+    -- programme réalise des entrées/sorties à l&#39;utlisateur et, à ce titre, a
+    -- des effets de bords.  Ceci est contradictoire avec la notion de fonction
+    -- au sens mathématique du  terme.  Nous en faisons donc une procédure.
+    --
+    -- Notons que ce n&#39;est pas le choix fait par tous les langages, Python par
+    -- exemple et sa fonction `input()`.
+
+
+    -- Ordonner trois caractères dans l&#39;ordre croissant.
+    -- Paramètres :
+    --  C1, C2, C3 : in out Character   -- les 3 caractères à ordonner
+    -- Nécessite : ---
+    -- Assure
+    --  C1 &lt;= C2 ET C2 &lt;= C3        -- ordonnées
+    --  (C1, C2, C3) est une permutation de (C1&#39;Old, C2&#39;Old, C3&#39; Old)
+    procedure Ordonner (C1, C2, C3 : in out Character);
+
+
+    -- Afficher un entier naturel.
+    -- Paramètres
+    --  Nombre : in Integer -- l&#39;entier, positif, à afficher
+    -- Nécessite
+    --      Nombre &gt;= 0
+    -- Assure
+    --      -- L&#39;entier a été affiché
+    procedure Afficher (Nombre: in Entier);
+
+
+    -- Remarque : dans ce fichier nous avons fait des déclaration en avant des
+    -- sous-programmes.  Le compilateur Ada signalera des erreurs car il ne
+    -- trouve pas le code de ces sous-programmes.   De telles spécifications
+    -- pourront être définies dans l&#39;interface d&#39;un module.
+
+end Specifications;
+</code></pre>
+</body>
+</html>

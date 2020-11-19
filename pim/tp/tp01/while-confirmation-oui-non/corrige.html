@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="" />
+  <title>Confirmer : Corrigé possible</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Confirmer : Corrigé possible</h1>
+<p class="author"></p>
+</header>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">with</span> Ada.Text_IO;          <span class="kw">use</span> Ada.Text_IO;</a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">-- Demander confirmation par &#39;o&#39; ou &#39;n&#39;.</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">procedure</span> Demander_Confirmation <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    Reponse: <span class="dt">Character</span>; <span class="co">-- le réponse de l&#39;utilisateur</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    Question: <span class="kw">constant</span> <span class="dt">String</span> := <span class="st">&quot;Confirmation (o/n) ? &quot;</span>;</a>
+<a class="sourceLine" id="cb1-7" title="7">    Consigne: <span class="kw">constant</span> <span class="dt">String</span> := <span class="st">&quot;Merci de répondre par &#39;o&#39; (oui) ou &#39;n&#39; (non).&quot;</span>;</a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9">    Saisie_OK: <span class="dt">Boolean</span>; <span class="co">-- Est-ce que l&#39;utilisateur a répondu correctement ?</span></a>
+<a class="sourceLine" id="cb1-10" title="10">        <span class="co">-- pour la version Répéter seulement</span></a>
+<a class="sourceLine" id="cb1-11" title="11"></a>
+<a class="sourceLine" id="cb1-12" title="12">    Avec_TantQue: <span class="kw">constant</span> <span class="dt">Boolean</span> := True;</a>
+<a class="sourceLine" id="cb1-13" title="13">    Avec_Repeter: <span class="kw">constant</span> <span class="dt">Boolean</span> := True;</a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-15" title="15">    <span class="kw">if</span> Avec_TantQue <span class="kw">then</span></a>
+<a class="sourceLine" id="cb1-16" title="16">        <span class="co">-- Dans cette version on duplique des instructions : demander confirmation</span></a>
+<a class="sourceLine" id="cb1-17" title="17"></a>
+<a class="sourceLine" id="cb1-18" title="18">        <span class="co">-- Demander de confirmer</span></a>
+<a class="sourceLine" id="cb1-19" title="19">        Put (Question);</a>
+<a class="sourceLine" id="cb1-20" title="20">        Get (Reponse);</a>
+<a class="sourceLine" id="cb1-21" title="21"></a>
+<a class="sourceLine" id="cb1-22" title="22">        <span class="kw">while</span> reponse /= <span class="ch">&#39;o&#39;</span> <span class="kw">and</span> reponse /= <span class="ch">&#39;n&#39;</span> <span class="kw">loop</span></a>
+<a class="sourceLine" id="cb1-23" title="23">            <span class="co">-- Rappeler la consigne</span></a>
+<a class="sourceLine" id="cb1-24" title="24">            Put_Line (consigne);</a>
+<a class="sourceLine" id="cb1-25" title="25"></a>
+<a class="sourceLine" id="cb1-26" title="26">            <span class="co">-- Demander de confirmer</span></a>
+<a class="sourceLine" id="cb1-27" title="27">            Put (Question);</a>
+<a class="sourceLine" id="cb1-28" title="28">            Get (Reponse);</a>
+<a class="sourceLine" id="cb1-29" title="29">        <span class="kw">end loop</span>;</a>
+<a class="sourceLine" id="cb1-30" title="30"></a>
+<a class="sourceLine" id="cb1-31" title="31">    <span class="kw">else</span> <span class="co">-- avec un Répéter</span></a>
+<a class="sourceLine" id="cb1-32" title="32"></a>
+<a class="sourceLine" id="cb1-33" title="33">        <span class="kw">if</span> Avec_Repeter <span class="kw">then</span></a>
+<a class="sourceLine" id="cb1-34" title="34"></a>
+<a class="sourceLine" id="cb1-35" title="35">            <span class="co">-- Dans cette version on duplique la condition.  Pour éviter de la calculer</span></a>
+<a class="sourceLine" id="cb1-36" title="36">            <span class="co">-- plusieurs fois, on ajoute une variable booléenne Saisie_OK.</span></a>
+<a class="sourceLine" id="cb1-37" title="37"></a>
+<a class="sourceLine" id="cb1-38" title="38">            <span class="kw">loop</span></a>
+<a class="sourceLine" id="cb1-39" title="39">                <span class="co">-- Demander de confirmer</span></a>
+<a class="sourceLine" id="cb1-40" title="40">                Put (Question);</a>
+<a class="sourceLine" id="cb1-41" title="41">                Get (Reponse);</a>
+<a class="sourceLine" id="cb1-42" title="42"></a>
+<a class="sourceLine" id="cb1-43" title="43">                Saisie_OK := reponse = <span class="ch">&#39;o&#39;</span> <span class="kw">or</span> reponse = <span class="ch">&#39;n&#39;</span>;</a>
+<a class="sourceLine" id="cb1-44" title="44">                <span class="kw">if</span> <span class="kw">not</span> Saisie_OK <span class="kw">then</span></a>
+<a class="sourceLine" id="cb1-45" title="45">                    <span class="co">-- Rappeler la consigne</span></a>
+<a class="sourceLine" id="cb1-46" title="46">                    Put (consigne);</a>
+<a class="sourceLine" id="cb1-47" title="47">                <span class="kw">else</span></a>
+<a class="sourceLine" id="cb1-48" title="48">                    <span class="kw">Null</span>;</a>
+<a class="sourceLine" id="cb1-49" title="49">                <span class="kw">end if</span>;</a>
+<a class="sourceLine" id="cb1-50" title="50"></a>
+<a class="sourceLine" id="cb1-51" title="51">            <span class="kw">exit</span> <span class="kw">when</span> Saisie_OK;</a>
+<a class="sourceLine" id="cb1-52" title="52">            <span class="kw">end loop</span>;</a>
+<a class="sourceLine" id="cb1-53" title="53"></a>
+<a class="sourceLine" id="cb1-54" title="54">        <span class="kw">else</span>    <span class="co">-- version plus Ada...</span></a>
+<a class="sourceLine" id="cb1-55" title="55"></a>
+<a class="sourceLine" id="cb1-56" title="56">            <span class="co">-- mettre le when exit plus haut évite de publiquer la condition...</span></a>
+<a class="sourceLine" id="cb1-57" title="57"></a>
+<a class="sourceLine" id="cb1-58" title="58">            <span class="kw">loop</span></a>
+<a class="sourceLine" id="cb1-59" title="59">                <span class="co">-- Demander de confirmer</span></a>
+<a class="sourceLine" id="cb1-60" title="60">                Put (Question);</a>
+<a class="sourceLine" id="cb1-61" title="61">                Get (Reponse);</a>
+<a class="sourceLine" id="cb1-62" title="62"></a>
+<a class="sourceLine" id="cb1-63" title="63">            <span class="kw">exit</span> <span class="kw">when</span> reponse = <span class="ch">&#39;o&#39;</span> <span class="kw">or</span> reponse = <span class="ch">&#39;n&#39;</span>;</a>
+<a class="sourceLine" id="cb1-64" title="64"></a>
+<a class="sourceLine" id="cb1-65" title="65">                <span class="co">-- Rappeler la consigne</span></a>
+<a class="sourceLine" id="cb1-66" title="66">                Put (consigne);</a>
+<a class="sourceLine" id="cb1-67" title="67"></a>
+<a class="sourceLine" id="cb1-68" title="68">            <span class="kw">end loop</span>;</a>
+<a class="sourceLine" id="cb1-69" title="69"></a>
+<a class="sourceLine" id="cb1-70" title="70">        <span class="kw">end if</span>;</a>
+<a class="sourceLine" id="cb1-71" title="71"></a>
+<a class="sourceLine" id="cb1-72" title="72">    <span class="kw">end if</span>;</a>
+<a class="sourceLine" id="cb1-73" title="73"></a>
+<a class="sourceLine" id="cb1-74" title="74">    <span class="co">-- Afficher la réponse</span></a>
+<a class="sourceLine" id="cb1-75" title="75">    Put (Reponse);</a>
+<a class="sourceLine" id="cb1-76" title="76"><span class="kw">end</span> Demander_Confirmation;</a></code></pre></div>
+</body>
+</html>

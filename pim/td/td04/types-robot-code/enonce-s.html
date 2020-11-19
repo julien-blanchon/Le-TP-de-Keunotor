@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Robot de type 1 : Quelques sous-programmes</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Robot de type 1 : Quelques sous-programmes</h1>
+</header>
+<h3 id="statement">Énoncé</h3>
+<p>Le type <code>T_Robot</code> a été défini ainsi que la spécification des sous-programmes <code>Avancer</code> et <code>Pivoter</code>.</p>
+<p><strong>Questions :</strong></p>
+<ol type="1">
+<li>Lire et comprendre la partie T_Direction
+<ol type="a">
+<li>Pourquoi les valeurs de ce type énuméré ont été déclarées dans cet ordre ?</li>
+<li>Comment l’utilisateur doit-il saisir une direction (voir le code de Get_Direction) ?</li>
+<li>La procédure Get_Direction n’est pas robuste. Pourquoi ?</li>
+<li><em>Remarque :</em> <code>To_Upper</code> est définie dans <code>Ada.Characters.Handling</code> : <code>To_Upper (S)</code> retourne une chaîne dont les caractères sont ceux de <code>S</code> en majuscule.</li>
+<li>Est-ce que la procédure <code>Get_Direction</code> aurait pu être appelée <code>Get</code> tout simplement ?</li>
+</ol></li>
+<li>Lire et comprendre la partie T_Robot.
+<ol type="a">
+<li>Donner le code de <code>Avancer</code></li>
+<li>Donner le code de <code>Pivoter</code></li>
+<li>Vérifier avec PIXAL. Les 2 premiers tests devraient réussir (tests en ‘r’).</li>
+</ol></li>
+<li>Lire et comprendre la partie Environnement
+<ol type="a">
+<li>Aurait-il été possible de prendre un type booléen au lieu de définir le type <code>T_Case</code> ? La réponse doit être justifiée.</li>
+<li>À quoi correspondent les constantes <code>DX</code> et <code>DY</code> ?</li>
+<li>Compléter le code de la procédure Foncer</li>
+<li>Vérifier avec PIXAL. Tous les tests devraient réussir.</li>
+</ol></li>
+</ol>
+<h3 id="samples">Exemples</h3>
+<p><strong>Exemple 1 :</strong></p>
+<pre><code class="noPrism">Type de test : <mark><b>r
+</b></mark>Abscisse : <mark><b>4</b></mark>
+Ordonnée : <mark><b>2</b></mark>
+Direction : <mark><b>ouest</b></mark>
+Robot lu : (4, 2)>ouest>
+Avancer : (3, 2)>ouest>
+Pivoter : (3, 2)>nord>
+Avancer : (3, 3)>nord>
+Pivoter : (3, 3)>est>
+Avancer : (4, 3)>est>
+Pivoter : (4, 3)>sud>
+Avancer : (4, 2)>sud>
+Pivoter : (4, 2)>ouest>
+</code></pre>
+<p><strong>Exemple 3 :</strong> Arrêt sur un obstacle</p>
+<pre><code class="noPrism">Type de test : <mark><b>e
+</b></mark>Abscisse : <mark><b>4</b></mark>
+Ordonnée : <mark><b>2</b></mark>
+Direction : <mark><b>est</b></mark>
+Robot lu : (4, 2)>est>
+Le robot fonce...
+Le robot s'arrête en : (23, 2)>est>
+</code></pre>
+<p><strong>Exemple 4 :</strong> Arrêt à la limite de l’environnement</p>
+<pre><code class="noPrism">Type de test : <mark><b>e
+</b></mark>Abscisse : <mark><b>4</b></mark>
+Ordonnée : <mark><b>2</b></mark>
+Direction : <mark><b>ouest</b></mark>
+Robot lu : (4, 2)>ouest>
+Le robot fonce...
+Le robot s'arrête en : (-100, 2)>ouest>
+</code></pre>
+<h3 id="squelette">Squelette</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">with</span> Ada.Text_IO;             <span class="kw">use</span> Ada.Text_IO;</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">with</span> Ada.Integer_Text_IO;     <span class="kw">use</span> Ada.Integer_Text_IO;</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">with</span> Ada.Characters.Handling; <span class="kw">use</span> Ada.Characters.Handling;</a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">procedure</span> Robot_Type_<span class="dv">1</span> <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">--| Le type T_Direction |---------------------------------------------------</span></a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="kw">type</span> T_Direction <span class="kw">is</span> (NORD, EST, SUD, OUEST);</a>
+<a class="sourceLine" id="cb1-10" title="10"></a>
+<a class="sourceLine" id="cb1-11" title="11"></a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="kw">procedure</span> Get_Direction (Direction: <span class="kw">out</span> T_Direction ; Consigne: <span class="dt">String</span>) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-13" title="13">        Taille_Max: <span class="kw">constant</span> <span class="dt">Integer</span> := <span class="dv">10</span>;         <span class="co">-- suffisant pour une direction</span></a>
+<a class="sourceLine" id="cb1-14" title="14">        Direction_Texte: <span class="dt">String</span> (<span class="dv">1</span>..Taille_Max);    <span class="co">-- une direction lue au clavier</span></a>
+<a class="sourceLine" id="cb1-15" title="15">        Taille: <span class="dt">Integer</span>;            <span class="co">-- la taille effective de Direction_Texte</span></a>
+<a class="sourceLine" id="cb1-16" title="16">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-17" title="17">        <span class="co">-- Demander la direction (String)</span></a>
+<a class="sourceLine" id="cb1-18" title="18">        Put (Consigne);</a>
+<a class="sourceLine" id="cb1-19" title="19">        Get_Line (Direction_Texte, Taille);     <span class="co">--! Lire une chaîne de caractère</span></a>
+<a class="sourceLine" id="cb1-20" title="20">            <span class="co">--! Réalise un Skip_Line</span></a>
+<a class="sourceLine" id="cb1-21" title="21"></a>
+<a class="sourceLine" id="cb1-22" title="22">        <span class="co">-- Convertir la direction en texte en T_Direction</span></a>
+<a class="sourceLine" id="cb1-23" title="23">        Direction := T_Direction&#39;Value (To_Upper (Direction_Texte (<span class="dv">1</span>..Taille)));</a>
+<a class="sourceLine" id="cb1-24" title="24">    <span class="kw">end</span> Get_Direction;</a>
+<a class="sourceLine" id="cb1-25" title="25"></a>
+<a class="sourceLine" id="cb1-26" title="26"></a>
+<a class="sourceLine" id="cb1-27" title="27"><span class="co">--| Le type T_Robot |-------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb1-28" title="28"></a>
+<a class="sourceLine" id="cb1-29" title="29">    <span class="kw">type</span> T_Robot <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-30" title="30">        <span class="co">--    ^ Y</span></a>
+<a class="sourceLine" id="cb1-31" title="31">        <span class="co">--    |</span></a>
+<a class="sourceLine" id="cb1-32" title="32">        <span class="co">--    |         Robot de coordonnées (4, 2) direction OUEST</span></a>
+<a class="sourceLine" id="cb1-33" title="33">        <span class="co">--  2 |      &lt;o</span></a>
+<a class="sourceLine" id="cb1-34" title="34">        <span class="co">--  1 |</span></a>
+<a class="sourceLine" id="cb1-35" title="35">        <span class="co">--   -+--------------------------------&gt;</span></a>
+<a class="sourceLine" id="cb1-36" title="36">        <span class="co">--    | 1 2 3 4                        Y</span></a>
+<a class="sourceLine" id="cb1-37" title="37">        <span class="kw">record</span></a>
+<a class="sourceLine" id="cb1-38" title="38">            Abscisse, Ordonnee: <span class="dt">Integer</span>;    <span class="co">-- les coordonnées</span></a>
+<a class="sourceLine" id="cb1-39" title="39">            Direction: T_Direction;         <span class="co">-- direction du robot</span></a>
+<a class="sourceLine" id="cb1-40" title="40">        <span class="kw">end record</span>;</a>
+<a class="sourceLine" id="cb1-41" title="41"></a>
+<a class="sourceLine" id="cb1-42" title="42"></a>
+<a class="sourceLine" id="cb1-43" title="43">    <span class="co">-- Initialiser un robot à partir se son abscisse, sont ordonnée et sa direction.</span></a>
+<a class="sourceLine" id="cb1-44" title="44">    <span class="kw">procedure</span> Initialiser (</a>
+<a class="sourceLine" id="cb1-45" title="45">            Robot : <span class="kw">out</span> T_Robot;</a>
+<a class="sourceLine" id="cb1-46" title="46">            Abscisse, Ordonnee: <span class="kw">in</span> <span class="dt">Integer</span>;</a>
+<a class="sourceLine" id="cb1-47" title="47">            Direction: T_Direction</a>
+<a class="sourceLine" id="cb1-48" title="48">            ) <span class="kw">with</span></a>
+<a class="sourceLine" id="cb1-49" title="49">        Post =&gt; Robot.Abscisse = Abscisse</a>
+<a class="sourceLine" id="cb1-50" title="50">            <span class="kw">and</span> Robot.Ordonnee = Ordonnee</a>
+<a class="sourceLine" id="cb1-51" title="51">            <span class="kw">and</span> Robot.Direction = Direction</a>
+<a class="sourceLine" id="cb1-52" title="52">    <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-53" title="53">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-54" title="54">        Robot := T_Robot&#39;(Abscisse, Ordonnee, Direction);</a>
+<a class="sourceLine" id="cb1-55" title="55">    <span class="kw">end</span> Initialiser;</a>
+<a class="sourceLine" id="cb1-56" title="56"></a>
+<a class="sourceLine" id="cb1-57" title="57"></a>
+<a class="sourceLine" id="cb1-58" title="58">    <span class="co">-- Afficher un robot sous la forme &quot;(X, Y)&gt;Direction&gt;&quot;.</span></a>
+<a class="sourceLine" id="cb1-59" title="59">    <span class="kw">procedure</span> Put (Robot: <span class="kw">in</span> T_Robot) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-60" title="60">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-61" title="61">        Put (<span class="st">&quot;(&quot;</span>);</a>
+<a class="sourceLine" id="cb1-62" title="62">        Put (Robot.Abscisse, <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb1-63" title="63">        Put (<span class="st">&quot;, &quot;</span>);</a>
+<a class="sourceLine" id="cb1-64" title="64">        Put (Robot.Ordonnee, <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb1-65" title="65">        Put (<span class="st">&quot;)&gt;&quot;</span>);</a>
+<a class="sourceLine" id="cb1-66" title="66">        Put (To_Lower (T_Direction&#39;Image(Robot.Direction)));</a>
+<a class="sourceLine" id="cb1-67" title="67">        Put (<span class="st">&quot;&gt;&quot;</span>);</a>
+<a class="sourceLine" id="cb1-68" title="68">    <span class="kw">end</span> Put;</a>
+<a class="sourceLine" id="cb1-69" title="69"></a>
+<a class="sourceLine" id="cb1-70" title="70"></a>
+<a class="sourceLine" id="cb1-71" title="71">    <span class="co">-- Afficher un robot en ajout un retour à la ligne.</span></a>
+<a class="sourceLine" id="cb1-72" title="72">    <span class="kw">procedure</span> Put_Line (Robot: <span class="kw">in</span> T_Robot) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-73" title="73">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-74" title="74">        Put (Robot);</a>
+<a class="sourceLine" id="cb1-75" title="75">        New_Line;</a>
+<a class="sourceLine" id="cb1-76" title="76">    <span class="kw">end</span> Put_Line;</a>
+<a class="sourceLine" id="cb1-77" title="77"></a>
+<a class="sourceLine" id="cb1-78" title="78"></a>
+<a class="sourceLine" id="cb1-79" title="79">    <span class="co">-- Faire avancer le robot d&#39;une case suivant sa direction courante.</span></a>
+<a class="sourceLine" id="cb1-80" title="80">    <span class="kw">procedure</span> Avancer (Robot : <span class="kw">in</span> <span class="kw">out</span> T_Robot) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-81" title="81">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-82" title="82">        <span class="kw">null</span>;   <span class="co">-- TODO: à remplacer</span></a>
+<a class="sourceLine" id="cb1-83" title="83">    <span class="kw">end</span> Avancer;</a>
+<a class="sourceLine" id="cb1-84" title="84"></a>
+<a class="sourceLine" id="cb1-85" title="85"></a>
+<a class="sourceLine" id="cb1-86" title="86">    <span class="co">-- Faire pivoter le robot dans le sens NORD, EST, SUD, OUEST</span></a>
+<a class="sourceLine" id="cb1-87" title="87">    <span class="kw">procedure</span> Pivoter (Robot : <span class="kw">in</span> <span class="kw">out</span> T_Robot) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-88" title="88">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-89" title="89">        <span class="kw">null</span>;   <span class="co">-- TODO: à remplacer</span></a>
+<a class="sourceLine" id="cb1-90" title="90">    <span class="kw">end</span> Pivoter;</a>
+<a class="sourceLine" id="cb1-91" title="91"></a>
+<a class="sourceLine" id="cb1-92" title="92"></a>
+<a class="sourceLine" id="cb1-93" title="93"><span class="co">--| Le type T_Environnement |-----------------------------------------------</span></a>
+<a class="sourceLine" id="cb1-94" title="94"></a>
+<a class="sourceLine" id="cb1-95" title="95">    MAX_X: <span class="kw">constant</span> <span class="dt">Integer</span> := <span class="dv">100</span>;</a>
+<a class="sourceLine" id="cb1-96" title="96">    MAX_Y: <span class="kw">constant</span> <span class="dt">Integer</span> := <span class="dv">50</span>;</a>
+<a class="sourceLine" id="cb1-97" title="97"></a>
+<a class="sourceLine" id="cb1-98" title="98">    <span class="kw">type</span> T_<span class="kw">Case</span> <span class="kw">is</span> (LIBRE, OBSTACLE);</a>
+<a class="sourceLine" id="cb1-99" title="99">    <span class="kw">type</span> T_Environnement <span class="kw">is</span> <span class="kw">array</span> (-MAX_x..MAX_X, -MAX_Y..MAX_Y) <span class="kw">of</span> T_<span class="kw">Case</span>;</a>
+<a class="sourceLine" id="cb1-100" title="100"></a>
+<a class="sourceLine" id="cb1-101" title="101"></a>
+<a class="sourceLine" id="cb1-102" title="102">    <span class="co">-- Faire avancer le robot d&#39;une case suivant sa direction courante dans une</span></a>
+<a class="sourceLine" id="cb1-103" title="103">    <span class="co">-- environnement.  On considère qu&#39;il peut y avoir plusieurs robots dans la</span></a>
+<a class="sourceLine" id="cb1-104" title="104">    <span class="co">-- même case de l&#39;environnement.  Le robot n&#39;avance pas s&#39;il y a un obstrable.</span></a>
+<a class="sourceLine" id="cb1-105" title="105">    <span class="co">-- Il ne peut pas sortir de l&#39;environnement.</span></a>
+<a class="sourceLine" id="cb1-106" title="106">    <span class="kw">procedure</span> Avancer (Robot : <span class="kw">in</span> <span class="kw">out</span> T_Robot ; Environnement : T_Environnement) <span class="kw">with</span></a>
+<a class="sourceLine" id="cb1-107" title="107">        Pre =&gt; -MAX_X &lt;= Robot.Abscisse <span class="kw">and</span> Robot.Abscisse &lt;= Max_X</a>
+<a class="sourceLine" id="cb1-108" title="108">            <span class="kw">and</span> -MAX_Y &lt;= Robot.Ordonnee <span class="kw">and</span> Robot.Ordonnee &lt;= Max_Y</a>
+<a class="sourceLine" id="cb1-109" title="109">    <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-110" title="110">        <span class="kw">type</span> T_VecteurDeplacement <span class="kw">is</span> <span class="kw">array</span> (T_Direction) <span class="kw">of</span> <span class="dt">Integer</span>;</a>
+<a class="sourceLine" id="cb1-111" title="111">            <span class="co">-- Invariant : les valeurs sont 0, 1 ou -1</span></a>
+<a class="sourceLine" id="cb1-112" title="112"></a>
+<a class="sourceLine" id="cb1-113" title="113">        DX: <span class="kw">constant</span> T_VecteurDeplacement := (<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">-1</span>);</a>
+<a class="sourceLine" id="cb1-114" title="114">            <span class="co">-- déplacmeent suivant l&#39;axe des X</span></a>
+<a class="sourceLine" id="cb1-115" title="115"></a>
+<a class="sourceLine" id="cb1-116" title="116">        DY: <span class="kw">constant</span> T_VecteurDeplacement := (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">-1</span>, <span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb1-117" title="117">            <span class="co">-- déplacmeent suivant l&#39;axe des Y</span></a>
+<a class="sourceLine" id="cb1-118" title="118"></a>
+<a class="sourceLine" id="cb1-119" title="119">        Nouveau_X, Nouveau_Y: <span class="dt">Integer</span>; <span class="co">-- nouvelles coordonnées du robot si pas d&#39;obstacle</span></a>
+<a class="sourceLine" id="cb1-120" title="120">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-121" title="121">        <span class="co">-- Calculer les nouvelles coordonnées théoriques du robot</span></a>
+<a class="sourceLine" id="cb1-122" title="122">        Nouveau_X := Robot.Abscisse + DX (Robot.direction);</a>
+<a class="sourceLine" id="cb1-123" title="123">        Nouveau_Y := Robot.Ordonnee + DY (Robot.direction);</a>
+<a class="sourceLine" id="cb1-124" title="124"></a>
+<a class="sourceLine" id="cb1-125" title="125">        <span class="kw">if</span> (-MAX_X &lt;= Nouveau_X <span class="kw">and</span> Nouveau_X &lt;= Max_X</a>
+<a class="sourceLine" id="cb1-126" title="126">            <span class="kw">and</span> -MAX_Y &lt;= Nouveau_Y <span class="kw">and</span> Nouveau_Y &lt;= Max_Y)</a>
+<a class="sourceLine" id="cb1-127" title="127">            <span class="kw">and</span> <span class="kw">then</span> Environnement (Nouveau_X, Nouveau_Y) = LIBRE</a>
+<a class="sourceLine" id="cb1-128" title="128">        <span class="kw">then</span></a>
+<a class="sourceLine" id="cb1-129" title="129">            Robot.Abscisse := Nouveau_X;</a>
+<a class="sourceLine" id="cb1-130" title="130">            Robot.Ordonnee := Nouveau_Y;</a>
+<a class="sourceLine" id="cb1-131" title="131">        <span class="kw">else</span></a>
+<a class="sourceLine" id="cb1-132" title="132">            <span class="kw">null</span>;   <span class="co">-- le robot ne bouge pas</span></a>
+<a class="sourceLine" id="cb1-133" title="133">        <span class="kw">end if</span>;</a>
+<a class="sourceLine" id="cb1-134" title="134">    <span class="kw">end</span> Avancer;</a>
+<a class="sourceLine" id="cb1-135" title="135"></a>
+<a class="sourceLine" id="cb1-136" title="136"></a>
+<a class="sourceLine" id="cb1-137" title="137">    <span class="co">-- Faire pivoter le robot dans le sens NORD, EST, SUD, OUEST dans</span></a>
+<a class="sourceLine" id="cb1-138" title="138">    <span class="co">-- l&#39;environnement considéré.</span></a>
+<a class="sourceLine" id="cb1-139" title="139">    <span class="co">-- Remarque : l&#39;environnement n&#39;a pas d&#39;impact sur cette opération.</span></a>
+<a class="sourceLine" id="cb1-140" title="140">    <span class="kw">procedure</span> Pivoter (Robot : <span class="kw">in</span> <span class="kw">out</span> T_Robot; Environnement : <span class="kw">in</span> T_Environnement) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-141" title="141">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-142" title="142">        Pivoter (Robot);</a>
+<a class="sourceLine" id="cb1-143" title="143">    <span class="kw">end</span> Pivoter;</a>
+<a class="sourceLine" id="cb1-144" title="144"></a>
+<a class="sourceLine" id="cb1-145" title="145"></a>
+<a class="sourceLine" id="cb1-146" title="146">    <span class="co">-- Faire avancer le robot jusqu&#39;à un obstacle ou aux limites de</span></a>
+<a class="sourceLine" id="cb1-147" title="147">    <span class="co">-- l&#39;environnement.</span></a>
+<a class="sourceLine" id="cb1-148" title="148">    <span class="kw">procedure</span> Foncer(Robot : <span class="kw">in</span> <span class="kw">out</span> T_Robot; Environnement : <span class="kw">in</span> T_Environnement) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-149" title="149">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-150" title="150">        <span class="kw">null</span>; <span class="co">-- TODO: à remplacer</span></a>
+<a class="sourceLine" id="cb1-151" title="151">    <span class="kw">end</span> Foncer;</a>
+<a class="sourceLine" id="cb1-152" title="152"></a>
+<a class="sourceLine" id="cb1-153" title="153"><span class="co">--| Sous-programmes qui manipulent les sous-programmes précédents |---------</span></a>
+<a class="sourceLine" id="cb1-154" title="154"></a>
+<a class="sourceLine" id="cb1-155" title="155">    <span class="co">-- Lire les informations d&#39;un robot.</span></a>
+<a class="sourceLine" id="cb1-156" title="156">    <span class="kw">procedure</span> Lire_Robot (Robot : <span class="kw">out</span> T_Robot) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-157" title="157">        Abscisse, Ordonnee: <span class="dt">Integer</span>;   <span class="co">-- les coordonnées initiales du robot</span></a>
+<a class="sourceLine" id="cb1-158" title="158">        Direction: T_Direction;        <span class="co">-- la direction initiale du robot</span></a>
+<a class="sourceLine" id="cb1-159" title="159">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-160" title="160">        <span class="co">-- Demander l&#39;abscisse</span></a>
+<a class="sourceLine" id="cb1-161" title="161">        Put (<span class="st">&quot;Abscisse : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-162" title="162">        Get (Abscisse);</a>
+<a class="sourceLine" id="cb1-163" title="163">        Skip_Line;</a>
+<a class="sourceLine" id="cb1-164" title="164"></a>
+<a class="sourceLine" id="cb1-165" title="165">        <span class="co">-- Demander l&#39;ordonnée</span></a>
+<a class="sourceLine" id="cb1-166" title="166">        Put (<span class="st">&quot;Ordonnée : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-167" title="167">        Get (Ordonnee);</a>
+<a class="sourceLine" id="cb1-168" title="168">        Skip_Line;</a>
+<a class="sourceLine" id="cb1-169" title="169"></a>
+<a class="sourceLine" id="cb1-170" title="170">        <span class="co">-- Demander la direction</span></a>
+<a class="sourceLine" id="cb1-171" title="171">        Get_Direction (direction, <span class="st">&quot;Direction : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-172" title="172"></a>
+<a class="sourceLine" id="cb1-173" title="173">        Initialiser (Robot, Abscisse, Ordonnee, Direction);</a>
+<a class="sourceLine" id="cb1-174" title="174">    <span class="kw">end</span> Lire_Robot;</a>
+<a class="sourceLine" id="cb1-175" title="175"></a>
+<a class="sourceLine" id="cb1-176" title="176">    <span class="co">-- programme de test PIXAL pour le robot et ses sous-programmes</span></a>
+<a class="sourceLine" id="cb1-177" title="177">    <span class="kw">procedure</span> Exemple_Robot <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-178" title="178">        Robot1 : T_Robot;</a>
+<a class="sourceLine" id="cb1-179" title="179">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-180" title="180">        Lire_Robot (Robot1);</a>
+<a class="sourceLine" id="cb1-181" title="181">        Put (<span class="st">&quot;Robot lu : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-182" title="182">        Put_Line (Robot1);</a>
+<a class="sourceLine" id="cb1-183" title="183">        <span class="kw">for</span> i <span class="kw">in</span> <span class="dv">1</span>..<span class="dv">4</span> <span class="kw">loop</span></a>
+<a class="sourceLine" id="cb1-184" title="184">            Put (<span class="st">&quot;Avancer : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-185" title="185">            Avancer (Robot1);</a>
+<a class="sourceLine" id="cb1-186" title="186">            Put_Line (Robot1);</a>
+<a class="sourceLine" id="cb1-187" title="187"></a>
+<a class="sourceLine" id="cb1-188" title="188">            Put (<span class="st">&quot;Pivoter : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-189" title="189">            Pivoter (Robot1);</a>
+<a class="sourceLine" id="cb1-190" title="190">            Put_Line (Robot1);</a>
+<a class="sourceLine" id="cb1-191" title="191">        <span class="kw">end loop</span>;</a>
+<a class="sourceLine" id="cb1-192" title="192">    <span class="kw">end</span> Exemple_Robot;</a>
+<a class="sourceLine" id="cb1-193" title="193"></a>
+<a class="sourceLine" id="cb1-194" title="194"></a>
+<a class="sourceLine" id="cb1-195" title="195">    <span class="kw">procedure</span> Exemple_Robot_Dans_Environnment <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-196" title="196">        Robot1 : T_Robot;</a>
+<a class="sourceLine" id="cb1-197" title="197">        Environnement : T_Environnement;  <span class="co">-- un exemple d&#39;environnement</span></a>
+<a class="sourceLine" id="cb1-198" title="198">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-199" title="199">        <span class="co">-- Saisir le robot</span></a>
+<a class="sourceLine" id="cb1-200" title="200">        Lire_Robot (Robot1);</a>
+<a class="sourceLine" id="cb1-201" title="201">        Put (<span class="st">&quot;Robot lu : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-202" title="202">        Put_Line (Robot1);</a>
+<a class="sourceLine" id="cb1-203" title="203"></a>
+<a class="sourceLine" id="cb1-204" title="204">        <span class="co">-- Initialiser l&#39;environnement</span></a>
+<a class="sourceLine" id="cb1-205" title="205">        Environnement := (<span class="kw">others</span> =&gt; (<span class="kw">others</span> =&gt; LIBRE)); <span class="co">-- environnement vide</span></a>
+<a class="sourceLine" id="cb1-206" title="206">        Environnement ((Robot1.Abscisse + <span class="dv">20</span>) <span class="kw">mod</span> MAX_X, Robot1.Ordonnee) := OBSTACLE;</a>
+<a class="sourceLine" id="cb1-207" title="207"></a>
+<a class="sourceLine" id="cb1-208" title="208">        <span class="co">-- Faire foncer le robot</span></a>
+<a class="sourceLine" id="cb1-209" title="209">        Put_Line (<span class="st">&quot;Le robot fonce...&quot;</span>);</a>
+<a class="sourceLine" id="cb1-210" title="210">        Foncer (Robot1, environnement);</a>
+<a class="sourceLine" id="cb1-211" title="211"></a>
+<a class="sourceLine" id="cb1-212" title="212">        <span class="co">-- Afficher le robot</span></a>
+<a class="sourceLine" id="cb1-213" title="213">        Put (<span class="st">&quot;Le robot s&#39;arrête en : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-214" title="214">        Put_Line (Robot1);</a>
+<a class="sourceLine" id="cb1-215" title="215"></a>
+<a class="sourceLine" id="cb1-216" title="216">    <span class="kw">end</span> Exemple_Robot_Dans_Environnment;</a>
+<a class="sourceLine" id="cb1-217" title="217"></a>
+<a class="sourceLine" id="cb1-218" title="218"></a>
+<a class="sourceLine" id="cb1-219" title="219"><span class="co">--| Le programme principal |------------------------------------------------</span></a>
+<a class="sourceLine" id="cb1-220" title="220"></a>
+<a class="sourceLine" id="cb1-221" title="221">    Type_Test: <span class="dt">Character</span>;</a>
+<a class="sourceLine" id="cb1-222" title="222"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb1-223" title="223">    <span class="co">-- Choisir le type de test</span></a>
+<a class="sourceLine" id="cb1-224" title="224">    Put (<span class="st">&quot;Type de test : &quot;</span>);</a>
+<a class="sourceLine" id="cb1-225" title="225">    Get (Type_Test);</a>
+<a class="sourceLine" id="cb1-226" title="226">    Skip_Line;</a>
+<a class="sourceLine" id="cb1-227" title="227"></a>
+<a class="sourceLine" id="cb1-228" title="228">    <span class="co">-- Lancer le test choisi</span></a>
+<a class="sourceLine" id="cb1-229" title="229">    <span class="kw">case</span> To_Lower (Type_Test) <span class="kw">is</span></a>
+<a class="sourceLine" id="cb1-230" title="230">        <span class="kw">when</span> <span class="ch">&#39;r&#39;</span> =&gt; </a>
+<a class="sourceLine" id="cb1-231" title="231">            Exemple_Robot;</a>
+<a class="sourceLine" id="cb1-232" title="232">        <span class="kw">when</span> <span class="ch">&#39;e&#39;</span> =&gt; </a>
+<a class="sourceLine" id="cb1-233" title="233">            Exemple_Robot_Dans_Environnment;</a>
+<a class="sourceLine" id="cb1-234" title="234">        <span class="kw">when</span> <span class="kw">others</span> =&gt;</a>
+<a class="sourceLine" id="cb1-235" title="235">            Put (<span class="st">&quot;Test inconnu&quot;</span>);</a>
+<a class="sourceLine" id="cb1-236" title="236">    <span class="kw">end case</span>;</a>
+<a class="sourceLine" id="cb1-237" title="237"></a>
+<a class="sourceLine" id="cb1-238" title="238"><span class="kw">end</span> Robot_Type_<span class="dv">1</span>;</a></code></pre></div>
+</body>
+</html>

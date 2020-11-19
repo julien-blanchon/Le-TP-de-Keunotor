@@ -12,7 +12,7 @@ procedure Parenthesage is
             and then (Index'Result > Meule'Last or else Meule (Index'Result) = Aiguille)
     is
     begin
-        for i in 1..Meule'Last loop
+        for i in Meule'Range loop
             if Meule(i)=Aiguille then
                 return i;
             end if;
@@ -57,11 +57,37 @@ procedure Parenthesage is
     --   "]"       -> Non Correct et Indice_Erreur = 1
     --   "((()"    -> Non Correct et Indice_Erreur = 2
     --
+    package Pile_Caractere is
+        new Piles (Capacite => 100, T_Element => Character);
+    use Pile_Caractere;
+    package Pile_Integer is
+        new Piles (Capacite => 100, T_Element => Integer);
+    use Pile_Integer;
+
     procedure Verifier_Parenthesage (Chaine: in String ; Correct : out Boolean ; Indice_Erreur : out Integer) is
         Ouvrants : Constant String := "([{";
         Fermants : Constant String := ")]}";
+        Pile_Ouvrants : Pile_Caractere;
+        Pile_Indices : Pile_Integer;
+        Compteur : Integer := 0;
     begin
-        Null;   -- TODO : à corriger !
+      Initialiser (Pile_Ouvrants);
+      Initialiser (Pile_Indices);
+      for i in Chaine'Range loop
+          Compteur := i;
+          if Index(Ouvrants, Chaine(i)) = 4 then
+            Pile_Caractere.Empiler(Pile_Ouvrants, Chaine(i));
+            Pile_Integer.Empiler(Pile_Indices, i);
+          elsif Index(Fermants, Chaine(i)) = 4 then
+            Pile_Caractere.Depiler(Pile_Ouvrants);
+            Pile_Integer.Depiler(Pile_Indices);
+          end if;
+      end loop;
+      Correct := True;
+      Indice_Erreur := -1;
+      exception
+        when others =>  Correct := False;
+                        Indice_Erreur := Compteur;
     end Verifier_Parenthesage;
 
 

@@ -1,2 +1,0 @@
-Question 1: Normalement un produit matrixielle ou une égualité entre 2 vecteur se fait en temps linéaire O(n) avec n la taille des vecteurs. Cependant comme içi les matrices sont creuse donc on ne considere qu'un sous ensemble d'elts (les autres elts sont nul). Ainsi pour un vecteur creux avec m<=n composantes non nuls les calculs se resume a un calcul vectoriel d'un vecteur taille m donc on a une complexité de O(m) (linéaire aussi).
-

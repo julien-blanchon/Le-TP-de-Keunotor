@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Puissance entière d’un réel</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Puissance entière d’un réel</h1>
+</header>
+<h3 id="statement">Énoncé</h3>
+<p>Nous souhaitons écrire une fonction qui calcule la puissance entière d’un nombre réel sans utiliser l’opérateur puissance du langage Ada (<code>**</code>). Nous écrirons deux versions de cette fonction, la première récursive, la seconde itérative.</p>
+<p>Le programme fourni contient la spécification de ces deux fonctions ainsi qu’une implantation erronée. Le programme principal calcule la puissance avec les deux fonctions précédentes et affiche les résultats ainsi obtenus. Ceci permettra de tester ces deux sous-programmes.</p>
+<p><strong>Contraintes :</strong></p>
+<ol type="1">
+<li>Les spécifications des fonctions ne peuvent pas être changées.</li>
+<li>Le premier niveau de raffinage du programme principal ne peut pas être changé.</li>
+</ol>
+<p><strong>Questions :</strong></p>
+<ol type="1">
+<li>Que se passe-t-il quand on exécute ce programme sans modification. Pourquoi ?</li>
+<li>Rappeler quelle est la structure générale d’un sous-programme récursif.</li>
+<li>Indiquer un moyen qui permet de garantir la terminaison d’un sous-programme récursif.</li>
+<li>Est-ce que le programme principal est correct au vu de la spécification des fonctions qui calculent la puissance ?</li>
+<li>Programmer la version récursive et la tester. Tous les tests doivent réussir sauf les deux derniers.</li>
+<li>Programmer la version itérative et la tester. Tous les tests doivent réussir sauf les deux derniers.</li>
+<li>Corriger le programme principal pour que l’avant dernier test fonctionne. On ne doit pas modifier le premier niveau de raffinage du programme principal.</li>
+<li>Le dernier test échoue. C’est normal. Expliquer pourquoi. On pourra l’exécuter sous [JDoodle].</li>
+</ol>
+<h3 id="inputs">Entrée</h3>
+<ul>
+<li>un nombre réel</li>
+<li>un exposant, entier</li>
+</ul>
+<h3 id="outputs">Sortie</h3>
+<ul>
+<li>nombre à la puissance exposant, un réel (version récursive et version itérative)</li>
+</ul>
+<h3 id="samples">Exemples</h3>
+<pre><code>nombre      exposant   -&gt;  puissance
+--------------------------------------------------
+3.0         4          -&gt;  81.0                  nombre positif, exposant positif
+-2.0        5          -&gt;  32.0                  nombre négatif, exposant positif impair
+-2.0        6          -&gt;  64.0                  nombre négatif, exposant positif pair
+0.5         3          -&gt;  0.125                 
+4.0         -1         -&gt;  0.25                  exposant négatif
+17.0        1          -&gt;  17.0                  exposant = 1
+9.0         0          -&gt;  1.0                   exposant = 0
+0.0         0          -&gt;  1.0                   exposant = 0
+-1.0        100000     -&gt;  1.0                   exposant assez grand, pair
+-1.0        100001     -&gt;  -1.0                       &quot;       &quot;        impair
+0.0         -5         -&gt;  Division par zéro
+-1.0        1234567891 -&gt;  -1.0                  exposant très grand</code></pre>
+<p>Voici un exemple d’affichage</p>
+<pre><code class="noPrism">Un nombre réel : <mark><b>3.00000</b></mark>
+Un nombre entier : <mark><b>4</b></mark>
+Puissance (itérative) : 81.0000
+Puissance (récursive) : 81.0000
+</code></pre>
+<h3 id="squelette">Squelette</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">with</span> Ada.Text_IO;          <span class="kw">use</span> Ada.Text_IO;</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">with</span> Ada.Integer_Text_IO;  <span class="kw">use</span> Ada.Integer_Text_IO;</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">with</span> Ada.Float_Text_IO;    <span class="kw">use</span> Ada.Float_Text_IO;</a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw">procedure</span> Ecrire_Entier <span class="kw">is</span></a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="kw">function</span> Puissance_Iteratif (Nombre: <span class="kw">in</span> <span class="dt">Float</span> ; Exposant : <span class="kw">in</span> <span class="dt">Integer</span>) <span class="kw">return</span> <span class="dt">Float</span> <span class="kw">with</span></a>
+<a class="sourceLine" id="cb2-8" title="8">        Pre =&gt; Exposant &gt;= <span class="dv">0</span> <span class="kw">or</span> Nombre /= <span class="fl">0.0</span>;</a>
+<a class="sourceLine" id="cb2-9" title="9">        <span class="co">--! Ceci est une déclaration en avant.  La fonction Ecrire_Recursive</span></a>
+<a class="sourceLine" id="cb2-10" title="10">        <span class="co">--! est connue et peut être utilisée (sa signature suffit pour que le</span></a>
+<a class="sourceLine" id="cb2-11" title="11">        <span class="co">--! compilateur puisse vérifier l&#39;appel)</span></a>
+<a class="sourceLine" id="cb2-12" title="12">        <span class="co">--!</span></a>
+<a class="sourceLine" id="cb2-13" title="13">        <span class="co">--! Remarque : les contrats ne doivent apparaître que lors de la première</span></a>
+<a class="sourceLine" id="cb2-14" title="14">        <span class="co">--! apparition.  Ceci évite les redondances toujours sources d&#39;erreurs.</span></a>
+<a class="sourceLine" id="cb2-15" title="15"></a>
+<a class="sourceLine" id="cb2-16" title="16"></a>
+<a class="sourceLine" id="cb2-17" title="17">    <span class="co">-- Retourne Nombre à la puissance Exposant.</span></a>
+<a class="sourceLine" id="cb2-18" title="18">    <span class="kw">function</span> Puissance_Recursif (Nombre: <span class="kw">in</span> <span class="dt">Float</span> ; Exposant : <span class="kw">in</span> <span class="dt">Integer</span>) <span class="kw">return</span> <span class="dt">Float</span> <span class="kw">with</span></a>
+<a class="sourceLine" id="cb2-19" title="19">        Pre =&gt; Exposant &gt;= <span class="dv">0</span> <span class="kw">or</span> Nombre /= <span class="fl">0.0</span></a>
+<a class="sourceLine" id="cb2-20" title="20">    <span class="kw">is</span></a>
+<a class="sourceLine" id="cb2-21" title="21">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb2-22" title="22">        <span class="kw">return</span> Puissance_Iteratif(Nombre, Exposant);</a>
+<a class="sourceLine" id="cb2-23" title="23">    <span class="kw">end</span> Puissance_Recursif;</a>
+<a class="sourceLine" id="cb2-24" title="24"></a>
+<a class="sourceLine" id="cb2-25" title="25"></a>
+<a class="sourceLine" id="cb2-26" title="26">    <span class="kw">function</span> Puissance_Iteratif (Nombre: <span class="kw">in</span> <span class="dt">Float</span> ; Exposant : <span class="kw">in</span> <span class="dt">Integer</span>) <span class="kw">return</span> <span class="dt">Float</span> <span class="kw">is</span></a>
+<a class="sourceLine" id="cb2-27" title="27">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb2-28" title="28">        <span class="kw">return</span> Puissance_Recursif (Nombre, Exposant);</a>
+<a class="sourceLine" id="cb2-29" title="29">    <span class="kw">end</span> Puissance_Iteratif;</a>
+<a class="sourceLine" id="cb2-30" title="30"></a>
+<a class="sourceLine" id="cb2-31" title="31"></a>
+<a class="sourceLine" id="cb2-32" title="32">    Un_Reel: <span class="dt">Float</span>;         <span class="co">-- un réel lu au clavier</span></a>
+<a class="sourceLine" id="cb2-33" title="33">    Un_Entier: <span class="dt">Integer</span>;     <span class="co">-- un entier lu au clavier</span></a>
+<a class="sourceLine" id="cb2-34" title="34"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb2-35" title="35">    <span class="co">-- Demander le réel</span></a>
+<a class="sourceLine" id="cb2-36" title="36">    Put (<span class="st">&quot;Un nombre réel : &quot;</span>);</a>
+<a class="sourceLine" id="cb2-37" title="37">    Get (Un_Reel);</a>
+<a class="sourceLine" id="cb2-38" title="38"></a>
+<a class="sourceLine" id="cb2-39" title="39">    <span class="co">-- Demander l&#39;entier</span></a>
+<a class="sourceLine" id="cb2-40" title="40">    Put (<span class="st">&quot;Un nombre entier : &quot;</span>);</a>
+<a class="sourceLine" id="cb2-41" title="41">    Get (Un_Entier);</a>
+<a class="sourceLine" id="cb2-42" title="42"></a>
+<a class="sourceLine" id="cb2-43" title="43">    <span class="co">-- Afficher la puissance en version itérative</span></a>
+<a class="sourceLine" id="cb2-44" title="44">    Put (<span class="st">&quot;Puissance (itérative) : &quot;</span>);</a>
+<a class="sourceLine" id="cb2-45" title="45">    Put (Puissance_Iteratif (Un_Reel, Un_Entier), Fore =&gt; <span class="dv">0</span>, Exp =&gt; <span class="dv">0</span>,  Aft =&gt; <span class="dv">4</span>);</a>
+<a class="sourceLine" id="cb2-46" title="46">    New_Line;</a>
+<a class="sourceLine" id="cb2-47" title="47"></a>
+<a class="sourceLine" id="cb2-48" title="48">    <span class="co">-- Afficher la puissance en version récursive</span></a>
+<a class="sourceLine" id="cb2-49" title="49">    Put (<span class="st">&quot;Puissance (récursive) : &quot;</span>);</a>
+<a class="sourceLine" id="cb2-50" title="50">    Put (Puissance_Recursif (Un_Reel, Un_Entier), Fore =&gt; <span class="dv">0</span>, Exp =&gt; <span class="dv">0</span>,  Aft =&gt; <span class="dv">4</span>);</a>
+<a class="sourceLine" id="cb2-51" title="51">    New_Line;</a>
+<a class="sourceLine" id="cb2-52" title="52"></a>
+<a class="sourceLine" id="cb2-53" title="53"><span class="kw">end</span> Ecrire_Entier;</a></code></pre></div>
+</body>
+</html>

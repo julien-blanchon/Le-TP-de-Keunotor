@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="" />
+  <title>Spécifier et tester en Ada : Corrigé possible</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Spécifier et tester en Ada : Corrigé possible</h1>
+<p class="author"></p>
+</header>
+<p><strong>Exercice :</strong> Exécuter le programme et constater que PIXAL signale une erreur. La comprendre. La corriger et exécuter le programme à nouveau.</p>
+<p>L’erreur est signalée sur la ligne :</p>
+<pre><code>pragma Assert (R = 0);</code></pre>
+<p>Cette instruction a pour but de vérifier que c’est bien le bon reste qui a été calculé. L’erreur peut être soit dans la sous-programme appelé, ici <code>Calculer_DivMod</code>, soit dans le test lui-même. Commeçons par vérifier le test. Est-ce <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7</mn><mo>=</mo><mn>0</mn><mo>*</mo><mn>19</mn><mo>+</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">7 = 0 * 19 + 0</annotation></semantics></math> ? Non. L’erreur est donc dans le test. Il faut corriger la ligne précédente et la remplacer par :</p>
+<pre><code>pragma Assert (R = 7);</code></pre>
+<p>Quand on exécute le programme, aucune erreur n’est signalée. Peut-on en déduire que le programme est correct ?</p>
+<p>En fait non. On peut juste en déduire qu’il a fonctionné sur les tests faits. Le principe du test est d’essayer de trouver des erreurs dans le programme. Ce n’est pas parce qu’on n’en a pas trouvées qu’il n’y en a pas. Quand on fait du test on ne peut conclure que quand on a une erreur. On sait alors qu’il y a une erreur dans le programme… ou dans le test (comme ici).</p>
+<p><strong>Exercice :</strong> Que se passe-t-il quand on appelle un sous-progrmame sans respecter la précondition de ce dernier ?</p>
+<p>Parce que le programme est compilé avec <code>-gnata</code> les assertions sont vérifiées, en particulier les préconditions à l’appel d’un sous-programme et les postconditions quand il se termine. Le programme s’arrête et on sait qu’il y a un problème dans le programme écrit : l’appelant n’a pas rempli sa partie du contrat puisqu’il n’a pas appelé le sous-programme avec des paramètres respectant les préconditions de ce sous-programme.</p>
+<p><strong>Exercice :</strong> Modification de la postcondition.</p>
+<p>On constate ici aussi qu’une erreur à la compilation est signalée. Comme c’est une postcondition qui n’est pas satisfaite c’est que le sous-programme appelé n’a pas respecté sa partie du contrat : il n’a pas établi la postcondition.</p>
+<p><strong>Exercice : </strong> Quelle est l’erreur dans <code>Calculer_DivMod</code> ?</p>
+<p>Pour la trouver, on peut :</p>
+<ol type="1">
+<li><p>lire attentivement le code de ce sous-programme (en particulier exprimer les variants et invariants et démontrer que l’on bien calculé le Quotient et le Reste).</p></li>
+<li><p>compléter les tests</p></li>
+</ol>
+<p>On peut adopter la deuxième stratégie ici. Les test faits couvre les cas <code>Dividende &gt; Diviseur</code> et <code>Dividende &lt; Diviseur</code>. Il nous manque au moins le cas <code>Dividende = Diviseur</code> (et plus généralement le cas d’un reste nul).</p>
+<p>Si on rajoute un tel test, on constatera que le test échoue. Cette fois si l’erreur n’est pas dans le test mais dans le sous-programme. Ceci démontre bien qu’avoir les tests qui réussissent n’est pas suffisant pour en conclure que le programme est juste. C’est peut-être juste parce que l’on n’a pas encore identifié les bons tests !</p>
+<p>L’erreur est dans la condition du <code>TantQue</code> : il faut replacer <code>&gt;</code> par <code>&gt;=</code>.</p>
+<p>Voici le programme corrigé.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">with</span> Ada.Text_IO;</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">use</span> Ada.Text_IO;</a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="kw">procedure</span> Specifier_Et_Tester <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="co">-- La valeur absolue d&#39;un nombre entier.</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="kw">function</span> Valeur_Absolue (N : <span class="kw">in</span> <span class="dt">Integer</span>) <span class="kw">return</span> <span class="dt">Integer</span> <span class="kw">with</span></a>
+<a class="sourceLine" id="cb3-8" title="8">        Post =&gt; Valeur_Absolue&#39;Result &gt;= <span class="dv">0</span></a>
+<a class="sourceLine" id="cb3-9" title="9">            <span class="kw">and</span> (Valeur_Absolue&#39;Result = N <span class="kw">or</span> Valeur_Absolue&#39;Result = -N)</a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb3-12" title="12">        <span class="kw">if</span> N &gt;= <span class="dv">0</span> <span class="kw">then</span></a>
+<a class="sourceLine" id="cb3-13" title="13">            <span class="kw">return</span> N;</a>
+<a class="sourceLine" id="cb3-14" title="14">        <span class="kw">else</span></a>
+<a class="sourceLine" id="cb3-15" title="15">            <span class="kw">return</span> - N;</a>
+<a class="sourceLine" id="cb3-16" title="16">        <span class="kw">end if</span>;</a>
+<a class="sourceLine" id="cb3-17" title="17">    <span class="kw">end</span> Valeur_Absolue;</a>
+<a class="sourceLine" id="cb3-18" title="18"></a>
+<a class="sourceLine" id="cb3-19" title="19"></a>
+<a class="sourceLine" id="cb3-20" title="20">    <span class="co">-- Incrémenter un entier N.  Les entiers étant bornés, il ne faut pas que</span></a>
+<a class="sourceLine" id="cb3-21" title="21">    <span class="co">-- l&#39;entier soit le dernier Integer&#39;LAST.  Après exécution de Incrémenter,</span></a>
+<a class="sourceLine" id="cb3-22" title="22">    <span class="co">-- l&#39;entier passé en paramètre a sa valeur augmentée de 1.</span></a>
+<a class="sourceLine" id="cb3-23" title="23">    <span class="kw">procedure</span> Incrementer (N : <span class="kw">in</span> <span class="kw">out</span> <span class="dt">Integer</span>) <span class="kw">with</span></a>
+<a class="sourceLine" id="cb3-24" title="24">        Pre =&gt; N /= Integer&#39;LAST, </a>
+<a class="sourceLine" id="cb3-25" title="25">        Post =&gt; N = N&#39;Old + <span class="dv">1</span>       <span class="co">-- N incrémenté</span></a>
+<a class="sourceLine" id="cb3-26" title="26">    <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-27" title="27">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb3-28" title="28">        N := N + <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb3-29" title="29">    <span class="kw">end</span> Incrementer;</a>
+<a class="sourceLine" id="cb3-30" title="30"></a>
+<a class="sourceLine" id="cb3-31" title="31"></a>
+<a class="sourceLine" id="cb3-32" title="32">    <span class="co">-- Calculer le quotient et le reste de deux nombres entiers, Dividende et</span></a>
+<a class="sourceLine" id="cb3-33" title="33">    <span class="co">-- Diviseur.  Les deux doivent être positif et Diviseur doit être non nul.</span></a>
+<a class="sourceLine" id="cb3-34" title="34">    <span class="co">-- Quotient et Reste sont tels que Dividende = Quotient * Diviseur + Reste</span></a>
+<a class="sourceLine" id="cb3-35" title="35">    <span class="co">-- avec Reste compris entre 0 et Diviseur - 1.</span></a>
+<a class="sourceLine" id="cb3-36" title="36">    <span class="kw">procedure</span> Calculer_DivMod (Dividende, Diviseur : <span class="kw">in</span> <span class="dt">Integer</span> ; Quotient, Reste: <span class="kw">out</span> <span class="dt">Integer</span>) <span class="kw">with</span></a>
+<a class="sourceLine" id="cb3-37" title="37">        Pre =&gt; Dividende &gt;= <span class="dv">0</span> <span class="kw">and</span> Diviseur &gt; <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb3-38" title="38">        Post =&gt; Dividende = Quotient * Diviseur + Reste</a>
+<a class="sourceLine" id="cb3-39" title="39">            <span class="kw">and</span> <span class="dv">0</span> &lt;= Reste <span class="kw">and</span> Reste &lt; Diviseur</a>
+<a class="sourceLine" id="cb3-40" title="40">    <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-41" title="41">        Le_Quotient: <span class="dt">Integer</span>;</a>
+<a class="sourceLine" id="cb3-42" title="42">        Le_Reste: <span class="dt">Integer</span>;</a>
+<a class="sourceLine" id="cb3-43" title="43">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb3-44" title="44">        <span class="co">-- Principe : Le reste étant initialisé avec le dividende, le quotient</span></a>
+<a class="sourceLine" id="cb3-45" title="45">        <span class="co">-- est le nombre de fois que l&#39;on peut lui retrancher Diviseur.</span></a>
+<a class="sourceLine" id="cb3-46" title="46">        Le_Quotient := <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb3-47" title="47">        Le_Reste := Dividende;</a>
+<a class="sourceLine" id="cb3-48" title="48">        <span class="kw">while</span> Le_Reste &gt;= Diviseur <span class="kw">loop</span></a>
+<a class="sourceLine" id="cb3-49" title="49">            <span class="co">-- Variant : Le_Reste</span></a>
+<a class="sourceLine" id="cb3-50" title="50">            <span class="co">-- Invariant : Dividende = Le_Quotient * Diviseur + Le_Reste;</span></a>
+<a class="sourceLine" id="cb3-51" title="51">            Le_Quotient := Le_Quotient + <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb3-52" title="52">            Le_Reste := Le_Reste - Diviseur;</a>
+<a class="sourceLine" id="cb3-53" title="53">        <span class="kw">end loop</span>;</a>
+<a class="sourceLine" id="cb3-54" title="54"></a>
+<a class="sourceLine" id="cb3-55" title="55">        Quotient := Le_Quotient;</a>
+<a class="sourceLine" id="cb3-56" title="56">        Reste := Le_Reste;</a>
+<a class="sourceLine" id="cb3-57" title="57">            <span class="co">--! Quotient et Reste ne doivent être affectés qu&#39;une seule fois car en out</span></a>
+<a class="sourceLine" id="cb3-58" title="58">            <span class="co">--! Il est conseillé de le faire à la fin au cas où une exception se produirait</span></a>
+<a class="sourceLine" id="cb3-59" title="59">    <span class="kw">end</span> Calculer_DivMod;</a>
+<a class="sourceLine" id="cb3-60" title="60"></a>
+<a class="sourceLine" id="cb3-61" title="61"></a>
+<a class="sourceLine" id="cb3-62" title="62">    <span class="kw">procedure</span> Tester_Valeur_Absolue <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-63" title="63">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb3-64" title="64">        <span class="kw">pragma</span> <span class="ex">Assert</span> (Valeur_Absolue (<span class="dv">5</span>) = <span class="dv">5</span>);     <span class="co">-- Cas entier positif</span></a>
+<a class="sourceLine" id="cb3-65" title="65">        <span class="kw">pragma</span> <span class="ex">Assert</span> (Valeur_Absolue (-<span class="dv">7</span>) = <span class="dv">7</span>);    <span class="co">-- Cas entier négatif</span></a>
+<a class="sourceLine" id="cb3-66" title="66">        <span class="kw">pragma</span> <span class="ex">Assert</span> (Valeur_Absolue (<span class="dv">0</span>) = <span class="dv">0</span>);     <span class="co">-- Cas entier nul</span></a>
+<a class="sourceLine" id="cb3-67" title="67">    <span class="kw">end</span> Tester_Valeur_Absolue;</a>
+<a class="sourceLine" id="cb3-68" title="68"></a>
+<a class="sourceLine" id="cb3-69" title="69"></a>
+<a class="sourceLine" id="cb3-70" title="70">    <span class="kw">procedure</span> Tester_Incrementer <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-71" title="71">        Un_Nombre: <span class="dt">Integer</span>;</a>
+<a class="sourceLine" id="cb3-72" title="72">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb3-73" title="73">        <span class="co">-- un premier test</span></a>
+<a class="sourceLine" id="cb3-74" title="74">        Un_Nombre := <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb3-75" title="75">        Incrementer (Un_Nombre);</a>
+<a class="sourceLine" id="cb3-76" title="76">        <span class="kw">pragma</span> <span class="ex">Assert</span> (Un_Nombre = <span class="dv">2</span>);</a>
+<a class="sourceLine" id="cb3-77" title="77"></a>
+<a class="sourceLine" id="cb3-78" title="78">        <span class="co">-- un deuxième test</span></a>
+<a class="sourceLine" id="cb3-79" title="79">        Un_Nombre := <span class="dv">5</span>;</a>
+<a class="sourceLine" id="cb3-80" title="80">        Incrementer (Un_Nombre);</a>
+<a class="sourceLine" id="cb3-81" title="81">        <span class="kw">pragma</span> <span class="ex">Assert</span> (Un_Nombre = <span class="dv">6</span>);</a>
+<a class="sourceLine" id="cb3-82" title="82">    <span class="kw">end</span> Tester_Incrementer;</a>
+<a class="sourceLine" id="cb3-83" title="83"></a>
+<a class="sourceLine" id="cb3-84" title="84"></a>
+<a class="sourceLine" id="cb3-85" title="85">    <span class="kw">procedure</span> Tester_Calculer_DivMod <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-86" title="86">        Q, R: <span class="dt">Integer</span>;</a>
+<a class="sourceLine" id="cb3-87" title="87">    <span class="kw">begin</span></a>
+<a class="sourceLine" id="cb3-88" title="88">        <span class="co">-- Cas Dividende &gt; Diviseur et reste non nul</span></a>
+<a class="sourceLine" id="cb3-89" title="89">        Calculer_DivMod(<span class="dv">13</span>, <span class="dv">3</span>, Q, R);</a>
+<a class="sourceLine" id="cb3-90" title="90">        <span class="kw">pragma</span> <span class="ex">Assert</span> (Q = <span class="dv">4</span>);</a>
+<a class="sourceLine" id="cb3-91" title="91">        <span class="kw">pragma</span> <span class="ex">Assert</span> (R = <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb3-92" title="92"></a>
+<a class="sourceLine" id="cb3-93" title="93">        <span class="co">-- Cas Dividende = Diviseur</span></a>
+<a class="sourceLine" id="cb3-94" title="94">        Calculer_DivMod(<span class="dv">15</span>, <span class="dv">15</span>, Q, R);</a>
+<a class="sourceLine" id="cb3-95" title="95">        <span class="kw">pragma</span> <span class="ex">Assert</span> (Q = <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb3-96" title="96">        <span class="kw">pragma</span> <span class="ex">Assert</span> (R = <span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb3-97" title="97"></a>
+<a class="sourceLine" id="cb3-98" title="98">        <span class="co">-- Cas Dividende &gt; Diviseur et reste nul</span></a>
+<a class="sourceLine" id="cb3-99" title="99">        Calculer_DivMod(<span class="dv">15</span>, <span class="dv">5</span>, Q, R);</a>
+<a class="sourceLine" id="cb3-100" title="100">        <span class="kw">pragma</span> <span class="ex">Assert</span> (Q = <span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb3-101" title="101">        <span class="kw">pragma</span> <span class="ex">Assert</span> (R = <span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb3-102" title="102"></a>
+<a class="sourceLine" id="cb3-103" title="103">        <span class="co">-- Cas Dividende &lt; Diviseur</span></a>
+<a class="sourceLine" id="cb3-104" title="104">        Calculer_DivMod(<span class="dv">7</span>, <span class="dv">19</span>, Q, R);</a>
+<a class="sourceLine" id="cb3-105" title="105">        <span class="kw">pragma</span> <span class="ex">Assert</span> (Q = <span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb3-106" title="106">        <span class="kw">pragma</span> <span class="ex">Assert</span> (R = <span class="dv">7</span>);</a>
+<a class="sourceLine" id="cb3-107" title="107">    <span class="kw">end</span> Tester_Calculer_DivMod;</a>
+<a class="sourceLine" id="cb3-108" title="108"></a>
+<a class="sourceLine" id="cb3-109" title="109"></a>
+<a class="sourceLine" id="cb3-110" title="110"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb3-111" title="111">    Tester_Valeur_Absolue;</a>
+<a class="sourceLine" id="cb3-112" title="112">    Tester_Incrementer;</a>
+<a class="sourceLine" id="cb3-113" title="113">    Tester_Calculer_DivMod;</a>
+<a class="sourceLine" id="cb3-114" title="114"></a>
+<a class="sourceLine" id="cb3-115" title="115">    Put_Line (<span class="st">&quot;Fin&quot;</span>);</a>
+<a class="sourceLine" id="cb3-116" title="116"><span class="kw">end</span> Specifier_Et_Tester;</a></code></pre></div>
+</body>
+</html>

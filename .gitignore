@@ -1,3 +1,7 @@
+# Pour TP10
+pim/tp/tp10/*
+
+
 ###### Jupyter
 MANIFEST
 build
@@ -173,6 +177,13 @@ _opam/
 ###### ADA
 # Object file
 *.o
+
+b~*
+*.stderr
+*.stdout
+*.cswi
+*-loc.xml
+gnatinspect.db
 
 # Ada Library Information
 *.ali
