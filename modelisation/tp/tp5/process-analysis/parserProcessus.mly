@@ -8,7 +8,7 @@
 
 /* Declaration des unites lexicales et de leur type si une valeur particuliere leur est associee */
 
-%token PROCESS ACTIVITY STARTS FINISHES IF STARTED FINISHED
+%token PROCESS ACTIVITY REQUIRES STARTS FINISHES IF STARTED FINISHED
 %token RESOURCE AMOUNT
 %token LEFT_BRACE RIGHT_BRACE
 /* Defini le type des donnees associees a l'unite lexicale */
@@ -37,7 +37,14 @@ element : activite { (print_endline "element : activite") }
 
 resource : RESOURCE IDENTIFIER AMOUNT NUMBER { (print_endline "resource : resource IDENTIFIER amount NUMBER") }
 
-activite : ACTIVITY IDENTIFIER contraintes { (print_endline "activite : activity IDENTIFIER contraintes") }
+activite : ACTIVITY IDENTIFIER exigences contraintes { (print_endline "activite : activity IDENTIFIER contraintes") }
+            | ACTIVITY IDENTIFIER LEFT_BRACE elements RIGHT_BRACE exigences contraintes { (print_endline "activite : activity IDENTIFIER {elements} exigences contraintes") }
+
+exigences : /* Lambda, mot vide */ { (print_endline "exigences : /* Lambda, mot vide */") }
+            | requires exigences { (print_endline "exigences : REQUIRES") }
+
+requires : /* Lambda, mot vide */ { (print_endline "requires : /* Lambda, mot vide */") }
+           | REQUIRES NUMBER IDENTIFIER { (print_endline "requires : require NUMBER IDENTIFIER") }       
 
 contraintes : /* Lambda, mot vide */ { (print_endline "contraintes : /* Lambda, mot vide */") }
               | contrainte contraintes { (print_endline "contraintes : contrainte contraintes") }

@@ -5,6 +5,7 @@ let printToken t =
   (print_endline
      ("token: " ^ (match t with
        | PROCESS -> "process"
+       | REQUIRES -> "requires"
        | IDENTIFIER (texte) -> ("identifier(" ^ texte ^ ")")
        | ACTIVITY -> "activity"
        | STARTS -> "starts"
