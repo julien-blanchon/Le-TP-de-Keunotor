@@ -1,5 +1,5 @@
 
-function [C_x,C_y,M] = matrice_inertie(E_x,E_y,G_norme_E)
+function [C_x, C_y, M] = matrice_inertie(E_x,E_y,G_norme_E)
     PI = sum(G_norme_E);
     C_x = E_x'*G_norme_E/PI;
     C_y = E_y'*G_norme_E/PI;

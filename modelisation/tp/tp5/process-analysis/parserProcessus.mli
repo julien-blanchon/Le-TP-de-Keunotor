@@ -6,6 +6,7 @@ type token =
   | STARTED
   | RIGHT_BRACE
   | RESOURCE
+  | REQUIRES
   | PROCESS
   | NUMBER of (int)
   | LEFT_BRACE
