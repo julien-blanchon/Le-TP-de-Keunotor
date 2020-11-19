@@ -30,7 +30,7 @@ a = 2*(b1+b2);
 A = spdiags(ones(N2,1)*[-b2 a -b2], -1:1, N2, N2);
 D = spdiags(ones(N2,1)*[-b1], 0, N2, N2);
 
-L   = sparse([]);
+L = sparse([]);
     for i = 1:N1
        is = ( i - 1 ) * N2+1;
        ie = i * N2;

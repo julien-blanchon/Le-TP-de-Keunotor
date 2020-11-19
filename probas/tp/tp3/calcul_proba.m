@@ -6,7 +6,7 @@ function [x_min,x_max,probabilite] = calcul_proba(E_nouveau_repere,p)
     y_max = max(E_nouveau_repere(:, 2));
     l = abs(x_max - x_min);
     h = abs(y_max - y_min);
-    N = ceil(l*h);
+    N = round(l*h);
     n = length(E_nouveau_repere);
-    probabilite = 1 - binocdf(N, n-1, p);
+    probabilite = 1 - binocdf(n-1, N, p);
 end

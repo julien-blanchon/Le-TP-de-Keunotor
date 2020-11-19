@@ -23,22 +23,13 @@ function L = laplacian2(nu,dx1,dx2,N1,N2)
 % 
 
 % Initialisation
-b1 = nu(1)/dx1^2;
-b2 = nu(2)/dx2^2;
-a = 2*(b1+b2);
-
-A = spdiags(ones(N2,1)*[-b2 a -b2], -1:1, N2, N2);
-D = spdiags(ones(N2,1)*[-b1], 0, N2, N2);
-
-L   = sparse([]);
-    for i = 1:N1
-       is = ( i - 1 ) * N2+1;
-       ie = i * N2;
-       L(is:ie,is:ie) = A;
-       if ( i < N1 )
-          L(is:ie,ie+1:ie+N2) = D;
-          L(ie+1:ie+N2,is:ie) = D;
-       end
-    end
-    is = ( N1 - 1 ) * N2 + 1;
+    b1 = nu(1)/dx1^2;
+    b2 = nu(2)/dx2^2;
+    a = 2*(b1+b2);
+    ONE = ones(N1*N2,1);
+    ONE_AL1 = ONE;
+    ONE_AL1(2:N2:end) = 0;
+    ONE_AL2 = ONE;
+    ONE_AL2(1:N2:end) = 0;
+    L = full(spdiags([ONE ONE_AL1 ONE ONE_AL2 ONE].*[-b1 -b2 a -b2 -b1], [-N2, -1, 0, 1, N2], N1*N2, N1*N2));
 end

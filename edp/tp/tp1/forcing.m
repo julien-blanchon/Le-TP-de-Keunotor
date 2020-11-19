@@ -24,6 +24,5 @@ function b=forcing(nu, dx1, dx2, N1, N2)
 
 % Initialisation
 
-b= -ones(N1*N2,1);
-
+    b=-ones(N1*N2,1);
 end
