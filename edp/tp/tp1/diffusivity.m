@@ -34,7 +34,7 @@ function [uhref]=diffusivity(nu,L1,L2,N1,N2)
 
    % Calcul de la matrice du systeme
 
-   L = laplacian(nu,dx1,dx2,N1,N2);
+   L = laplacian3(nu,dx1,dx2,N1,N2);
    c = forcing(nu,dx1,dx2,N1,N2);
 
     % L*u = c

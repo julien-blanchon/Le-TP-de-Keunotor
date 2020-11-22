@@ -1,3 +1,4 @@
+% NE MARCHE PAS
 function L = laplacian2(nu,dx1,dx2,N1,N2)
 %
 %  Cette fonction construit la matrice de l'opérateur Laplacien 2D anisotrope
