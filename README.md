@@ -5,41 +5,78 @@
 </p>
 Dépot git communs pour les TDs et TPs du groupe B.
 
-# Avancement des TPs
-- :white_check_mark: Pim
-  - :white_check_mark: TD1
-  - :white_check_mark: TP1
-  - :white_check_mark: TD2
-  - :white_check_mark: TP2
-  - :white_check_mark: TD3
-  - :white_check_mark: TP3
-  - :white_check_mark: TD4
-  - :white_check_mark: TP4
-  - :white_check_mark: TD5
-  - :white_check_mark: TP5
-  - :white_check_mark: TD6
-  - :white_check_mark: TP6
-  - :white_check_mark: TD7
-  - :white_check_mark: TP7
-  - :white_check_mark: TD8
-  - :white_check_mark: TP8
-  - :white_check_mark: TD9
-  - :white_check_mark: TP9
-  - :white_check_mark: TP10
-- :x: Modelisation
-	- :x: TP1
-	- :x: TP2
-	- :x: TP3
-	- :x: TP4
-	- :x: TP5
-	- :x: TP6
-	- :x: TP7
-- :white_check_mark: Probas
-	- :white_check_mark: TP1
-	- :white_check_mark: TP2
-  - :white_check_mark: TP3
-- :white_check_mark: Optimisation
-	- :white_check_mark: TP1
+# Avancement des TPs/TDs
+- Pim
+  - TPs
+    - :white_check_mark: TP1
+    - :white_check_mark: TP2
+    - :white_check_mark: TP3
+    - :white_check_mark: TP4
+    - :white_check_mark: TP5
+    - :white_check_mark: TP6
+    - :white_check_mark: TP7
+    - :white_check_mark: TP8
+    - :white_check_mark: TP9
+    - :white_check_mark: TP10
+  - TDs
+    - :white_check_mark: TD1
+    - :white_check_mark: TD2
+    - :white_check_mark: TD3
+    - :white_check_mark: TD4
+    - :white_check_mark: TD5
+    - :white_check_mark: TD6
+    - :white_check_mark: TD7
+    - :white_check_mark: TD8
+    - :white_check_mark: TD9
+
+- Intégration
+  - TDs
+      - :x: TD1
+      - :x: TD2
+      - :x: TD3
+      - :x: TD4
+
+- Probas
+  - TPs
+    - :white_check_mark: TP1
+    - :white_check_mark: TP2
+    - :white_check_mark: TP3
+- Stats
+  - TPs
+      - :x: TP1
+      - :x: TP2
+      - :x: TP3
+- EDP
+  - TDs
+    - :white_check_mark: TD1
+  - TPs
+    - :x: TP1
+- Optimisation
+  - TPs
+	 - :white_check_mark: TP1
+- Modelisation
+  - TPs
+  	- :x: TP1
+  	- :x: TP2
+  	- :x: TP3
+  	- :x: TP4
+  	- :x: TP5
+  	- :x: TP6
+  	- :x: TP7
+- Archi
+  - TDs
+    - :white_check_mark: TD1
+- Traitement du Signal
+  - TDs
+    - :white_check_mark: TD1
+    - :white_check_mark: TD2
+    - :white_check_mark: TD3
+  - TPs
+    - :x: TP1
+    - :x: TP2
+- Language C
+    - TDs
+    - TPs
 
 
 # Table des matières
