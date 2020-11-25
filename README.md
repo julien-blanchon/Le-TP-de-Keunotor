@@ -51,7 +51,7 @@ Dépot git communs pour les TDs et TPs du groupe B.
     - :white_check_mark: TD1
   - TPs
     - :white_check_mark: TP1
-    - :x: TP2
+    - :white_check_mark: TP2
 
 - Optimisation
   - TPs
@@ -71,7 +71,7 @@ Dépot git communs pour les TDs et TPs du groupe B.
   - TDs
     - :white_check_mark: TD1
   - TPs
-    - :x: TP1
+    - :white_check_mark: TP1
 
 - Traitement du Signal
   - TDs
