@@ -1,6 +1,8 @@
 # Pour TP10
 pim/tp/tp10/*
 
+###### SVN
+.svn
 
 ###### Jupyter
 MANIFEST
