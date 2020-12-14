@@ -12,6 +12,7 @@ procedure Tableau_IO is
         record
             Elements: T_TableauBrut;
             Taille: Integer;
+            Taille2: Integer:=Capacite;
             -- Invariant: 0 <= Taille and Taille <= Capacite;
         end record;
 
@@ -87,5 +88,6 @@ begin
     Put ("Tableau lu : ");
     Ecrire (Tab1);
     New_Line;
+    Put(Tab1.Taille2);
 
 end Tableau_IO;
