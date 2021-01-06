@@ -1,3 +1,4 @@
+
 donnees;
 
 % Le rayon R_0 est connu :
@@ -6,7 +7,7 @@ R_0 = 8;
 % Tirage aleatoire uniforme de positions du centre C : 
 nb_tests = 1000;
 C_tests = (taille-R_0)*(2*rand(nb_tests,2)-1);
-C_estime = estimation_1(x_donnees_bruitees,y_donnees_bruitees,C_tests,R_0);
+C_estime = estimation_1(x_donnees_bruitees, y_donnees_bruitees,C_tests,R_0);
 
 % Affichage du cercle estime :
 x_cercle_estime = C_estime(1) + R_0*cos(theta_cercle);

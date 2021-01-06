@@ -1,3 +1,4 @@
+
 clear;
 close all;
 
@@ -18,7 +19,7 @@ set(hy,'Interpreter','Latex');
 
 % Bornes d'affichage des donnees centrees en (0,0) :
 taille = 20;
-bornes = [-taille taille -taille taille];
+bornes = [-taille taille, -taille taille];
 
 % Creation du cercle reel et des donnees bruitees :
 n = 50;
