@@ -7,6 +7,16 @@ Dépot git communs pour les TDs et TPs du groupe B.
 
 # Avancement des TPs/TDs
 - Pim
+  - TDs
+    - :white_check_mark: TD1
+    - :white_check_mark: TD2
+    - :white_check_mark: TD3
+    - :white_check_mark: TD4
+    - :white_check_mark: TD5
+    - :white_check_mark: TD6
+    - :white_check_mark: TD7
+    - :white_check_mark: TD8
+    - :white_check_mark: TD9
   - TPs
     - :white_check_mark: TP1
     - :white_check_mark: TP2
@@ -18,17 +28,7 @@ Dépot git communs pour les TDs et TPs du groupe B.
     - :white_check_mark: TP8
     - :white_check_mark: TP9
     - :white_check_mark: TP10
-  - TDs
-    - :white_check_mark: TD1
-    - :white_check_mark: TD2
-    - :white_check_mark: TD3
-    - :white_check_mark: TD4
-    - :white_check_mark: TD5
-    - :white_check_mark: TD6
-    - :white_check_mark: TD7
-    - :white_check_mark: TD8
-    - :white_check_mark: TD9
-
+  
 - Intégration
   - TDs
       - :x: TD1
@@ -50,10 +50,13 @@ Dépot git communs pour les TDs et TPs du groupe B.
   - TDs
     - :white_check_mark: TD1
   - TPs
-    - :x: TP1
+    - :white_check_mark: TP1
+    - :white_check_mark: TP2
+
 - Optimisation
   - TPs
 	 - :white_check_mark: TP1
+
 - Modelisation
   - TPs
   	- :x: TP1
@@ -63,9 +66,13 @@ Dépot git communs pour les TDs et TPs du groupe B.
   	- :x: TP5
   	- :x: TP6
   	- :x: TP7
+
 - Archi
   - TDs
     - :white_check_mark: TD1
+  - TPs
+    - :white_check_mark: TP1
+
 - Traitement du Signal
   - TDs
     - :white_check_mark: TD1
@@ -74,6 +81,7 @@ Dépot git communs pour les TDs et TPs du groupe B.
   - TPs
     - :x: TP1
     - :x: TP2
+
 - Language C
     - TDs
     - TPs

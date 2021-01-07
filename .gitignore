@@ -1,6 +1,11 @@
 # Pour TP10
-pim/tp/tp10/*
+pim/projet/*
 
+###### HIDE
+.hide
+
+###### SVN
+.svn
 
 ###### Jupyter
 MANIFEST

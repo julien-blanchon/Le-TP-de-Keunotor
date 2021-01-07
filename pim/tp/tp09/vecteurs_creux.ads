@@ -25,7 +25,6 @@ package Vecteurs_Creux is
 	function Composante_Recursif (V : in T_Vecteur_Creux ; Indice : in Integer) return Float
 		with Pre => Indice >= 1;
 
-
 	-- Récupérer la composante (valeur) du vecteur V à l'indice Indice.
 	function Composante_Iteratif (V : in T_Vecteur_Creux ; Indice : in Integer) return Float
 		with Pre => Indice >= 1;
