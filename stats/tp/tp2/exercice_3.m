@@ -1,26 +1,28 @@
 donnees;
 
-% Tirages aleatoires de l'angle theta (loi uniforme) :
-nb_tests = 100;
-theta_tests = pi*rand(nb_tests,1);
-[theta_estime,rho_estime] = estimation_3(x_donnees_bruitees,y_donnees_bruitees,theta_tests);
+n_tests = 100;
 
-% Affichage de la droite de regression estimee par maximum de vraisemblance :
-x_droite_estimee = x_droite_reelle;
-y_droite_estimee = y_droite_reelle;
-if abs(pi/2-theta_estime)<pi/4
-	y_droite_estimee = (rho_estime-x_droite_estimee*cos(theta_estime))/sin(theta_estime);
+% Estimation de la droite de regression par le maximum de vraisemblance :
+[theta_Dorth_1,rho_Dorth_1] = estimation_3(x_donnees_bruitees,y_donnees_bruitees,n_tests);
+
+% Affichage de la droite de regression estimee par le maximum de vraisemblance :
+cos_theta_Dorth_1 = cos(theta_Dorth_1);
+sin_theta_Dorth_1 = sin(theta_Dorth_1);
+if abs(cos_theta_Dorth_1)<abs(sin_theta_Dorth_1)
+	x_Dorth_1 = x_D;
+	y_Dorth_1 = (rho_Dorth_1-x_Dorth_1*cos_theta_Dorth_1)/sin_theta_Dorth_1;
 else
-	x_droite_estimee = (rho_estime-y_droite_estimee*sin(theta_estime))/cos(theta_estime);
+	y_Dorth_1 = y_D;
+	x_Dorth_1 = (rho_Dorth_1-y_Dorth_1*sin_theta_Dorth_1)/cos_theta_Dorth_1;
 end
-plot(x_droite_estimee,y_droite_estimee,'b','LineWidth',3);
+plot(x_Dorth_1,y_Dorth_1,'b','LineWidth',3);
 axis(bornes);
-lg = legend('~Droite reelle', ...
+lg = legend('~Droite', ...
 	'~Donnees bruitees', ...
-	'~$D_\perp$ estimee par MV', ...
+	'~$D_\perp$ (maximum de vraisemblance)', ...
 	'Location','Best');
 set(lg,'Interpreter','Latex');
 
 % Calcul et affichage de l'ecart angulaire :
-EA = min(abs([theta_estime-theta_0 theta_estime-theta_0+pi theta_estime-theta_0-pi]));
-fprintf('D_perp estimee par maximum de vraisemblance : ecart angulaire = %.2f degres\n',EA/pi*180);
+EA_Dorth_1 = abs(theta_Dorth_1-theta_D);
+fprintf('D_perp (maximum de vraisemblance) : ecart angulaire = %.2f degres\n',EA_Dorth_1/pi*180);

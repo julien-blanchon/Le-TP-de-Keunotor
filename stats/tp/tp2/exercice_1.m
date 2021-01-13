@@ -1,27 +1,27 @@
 donnees;
 
-% Tirages aleatoires de l'angle psi (loi uniforme) :
-nb_tests = 100;
-psi_tests = pi*(rand(nb_tests,1)-0.5);
-[a_estime,b_estime] = estimation_1(x_donnees_bruitees,y_donnees_bruitees,psi_tests);
+n_tests = 100;
 
-% Affichage de la droite de regression estimee par maximum de vraisemblance :
-x_droite_estimee = x_droite_reelle;
-y_droite_estimee = y_droite_reelle;
-if abs(a_estime)<1
-	y_droite_estimee = a_estime*x_droite_estimee+b_estime;
+% Estimation de la droite de regression par le maximum de vraisemblance :
+[a_DYX_1,b_DYX_1] = estimation_1(x_donnees_bruitees,y_donnees_bruitees,n_tests);
+
+% Affichage de la droite de regression estimee par le maximum de vraisemblance :
+if abs(a_DYX_1)<1
+	x_DYX_1 = x_D;
+	y_DYX_1 = a_DYX_1*x_DYX_1+b_DYX_1;
 else
-	x_droite_estimee = (y_droite_estimee-b_estime)/a_estime;
+	y_DYX_1 = y_D;
+	x_DYX_1 = (y_DYX_1-b_DYX_1)/a_DYX_1;
 end
-plot(x_droite_estimee,y_droite_estimee,'b','LineWidth',3);
+plot(x_DYX_1,y_DYX_1,'b','LineWidth',3);
 axis(bornes);
-lg = legend('~Droite reelle', ...
+lg = legend('~Droite', ...
 	'~Donnees bruitees', ...
-	'~$D_{YX}$ estimee par MV', ...
+	'~$D_{YX}$ (maximum de vraisemblance)', ...
 	'Location','Best');
 set(lg,'Interpreter','Latex');
 
 % Calcul et affichage de l'ecart angulaire :
-theta_estime = atan(a_estime)+pi/2;
-EA = min(abs([theta_estime-theta_0 theta_estime-theta_0+pi theta_estime-theta_0-pi]));
-fprintf('D_YX estimee par maximum de vraisemblance : ecart angulaire = %.2f degres\n',EA/pi*180);
+theta_DYX_1 = atan2(b_DYX_1,-a_DYX_1*b_DYX_1);
+EA_DYX_1 = abs(theta_DYX_1-theta_D);
+fprintf('D_YX (maximum de vraisemblance) : ecart angulaire = %.2f degres\n',EA_DYX_1/pi*180);

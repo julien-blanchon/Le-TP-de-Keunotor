@@ -6,8 +6,8 @@ L = taille_ecran(3);
 H = taille_ecran(4);
 
 % Fenetre d'affichage :
-figure('Name','Donnees situees au voisinage d''une droite', ...
-	'Position',[0.2*L,0,0.6*L,0.8*H]);
+figure('Name','Points situes au voisinage d''une droite', ...
+	'Position',[0.4*L,0,0.6*L,0.8*H]);
 axis equal;
 hold on;
 set(gca,'FontSize',20);
@@ -20,33 +20,33 @@ set(hy,'Interpreter','Latex');
 taille = 20;
 bornes = [-taille taille -taille taille];
 
-% Parametres de la droite reelle :
-theta_0 = pi*rand;
-cos_theta_0 = cos(theta_0);
-sin_theta_0 = sin(theta_0);
+% Parametres de la droite :
+theta_D = 2*pi*(rand-0.5);
+cos_theta_D = cos(theta_D);
+sin_theta_D = sin(theta_D);
 marge = 5;
-rho_0 = (taille-marge)*(2*rand-1);
+rho_D = (taille-marge)*rand;
 
-% Affichage de la droite reelle :
-droite_horizontale = abs(cos_theta_0)<abs(sin_theta_0);
+% Affichage de la droite :
+droite_horizontale = abs(cos_theta_D)<abs(sin_theta_D);
 pas = 0.01;
-x_droite_reelle = -taille:pas:taille;
-y_droite_reelle = -taille:pas:taille;
 if droite_horizontale
-	y_droite_reelle = (rho_0-cos_theta_0*x_droite_reelle)/sin_theta_0;
+	x_D = -taille:pas:taille;
+	y_D = (rho_D-cos_theta_D*x_D)/sin_theta_D;
 else
-	x_droite_reelle = (rho_0-sin_theta_0*y_droite_reelle)/cos_theta_0;
+	y_D = -taille:pas:taille;
+	x_D = (rho_D-sin_theta_D*y_D)/cos_theta_D;
 end
-plot(x_droite_reelle,y_droite_reelle,'r-','LineWidth',3);
+plot(x_D,y_D,'r-','LineWidth',3);
 
 % Donnees non bruitees :
 n = 50;
 if droite_horizontale
 	x_donnees = taille*(2*rand(1,n)-1);
-	y_donnees = (rho_0-cos_theta_0*x_donnees)/sin_theta_0;
+	y_donnees = (rho_D-cos_theta_D*x_donnees)/sin_theta_D;
 else
 	y_donnees = taille*(2*rand(1,n)-1);
-	x_donnees = (rho_0-sin_theta_0*y_donnees)/cos_theta_0;
+	x_donnees = (rho_D-sin_theta_D*y_donnees)/cos_theta_D;
 end
 
 % Donnees bruitees :
@@ -64,8 +64,7 @@ n = length(indices_visibles);
 % Affichage des donnees bruitees :
 plot(x_donnees_bruitees,y_donnees_bruitees,'k+','MarkerSize',10,'LineWidth',2);
 axis(bornes);
-lg = legend('~Droite reelle', ...
-	'~Donnees bruitees', ...
+lg = legend(' Droite', ...
+	' Donnees bruitees', ...
 	'Location','Best');
-set(lg,'Interpreter','Latex');
 grid on;
