@@ -1,3 +1,4 @@
+
 exercice_1;
 
 % Estimation de la droite de regression par resolution du systeme AX = B :
