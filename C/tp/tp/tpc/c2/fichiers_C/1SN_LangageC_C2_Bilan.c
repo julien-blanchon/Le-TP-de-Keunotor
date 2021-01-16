@@ -66,14 +66,14 @@ void test_create(){
     string ch, ch1, ch2;
     create(&ch, "UN");
     assert(ch.N == 3);
-    assert(ch.str[0] = 'U');
+    assert(ch.str[0] == 'U');
     create(&ch1, "DEUX");
     assert(ch1.N == 5);
-    assert(ch1.str[4] = '\0');
+    assert(ch1.str[4] == '\0');
     create(&ch2, "");
     assert(ch2.N == 1);
-    assert(ch2.str[0] = '\0');
-    
+    assert(ch2.str[0] == '\0');
+
     destroy(&ch);
     destroy(&ch1);
     destroy(&ch2);
@@ -118,7 +118,7 @@ void test_delete(){
     delete(&ch1, 0); //O
     delete(&ch1, 0); //_
     assert(length(ch1) == 0);
-    
+
     destroy(&ch1);
 }
 
@@ -128,7 +128,7 @@ void test_destroy(){
     create(&ch, "UN");
     destroy(&ch);
     assert(ch.str == NULL);
-    
+
     create(&ch1, "TROI");
     add(&ch1, 'S');
     destroy(&ch1);
@@ -141,8 +141,7 @@ int main(){
     test_add();
     test_delete();
     test_destroy();
-    
+
     printf("%s", "\n Bravo ! Tous les tests passent.\n");
     return EXIT_SUCCESS;
 }
-
