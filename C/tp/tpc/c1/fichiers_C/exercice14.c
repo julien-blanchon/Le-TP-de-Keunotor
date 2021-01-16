@@ -1,10 +1,9 @@
 
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
 #include <assert.h>
 
-// Definition du type Point 
+// Definition du type Point
 
 int main(){
     // Déclarer deux variables ptA et ptB de types Point
@@ -16,7 +15,7 @@ int main(){
     // Calculer la distance entre ptA et ptB.
     float distance = 0;
     
-    assert(distance == sqrt(200));
+    assert( int(distance*distance) == 200);
     
     return EXIT_SUCCESS;
 }

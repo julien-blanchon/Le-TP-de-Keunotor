@@ -13262,7 +13262,7 @@ Vous pouvez ainsi :</p>
 </blockquote>
 </li>
 <li>Une boucle TantQue avec la structure de contrôle <code>while</code>. Les instruction de corps de la boucle sont définies entre accolades.</li>
-<li>Une conditionelle <code>if (condition) then {..} else {..}</code></li>
+<li>Une conditionelle <code>if (condition) {..} else {..}</code></li>
 <li>Des déclarations de variables, des opérations d'initialisation et d'affectations. <blockquote><p><strong>Règle</strong> : L'opérateur d'affectation est <code>=</code>.</p>
 </blockquote>
 </li>
@@ -13294,15 +13294,16 @@ Vous pouvez ainsi :</p>
 <li>L'exécution du compilateur C. </li>
 </ol>
 <p>Les deux étapes sont réalisées par un seul appel à la suite de compilation avec la commande :</p>
-<blockquote><p><code>gcc -Wall premier_programme.c -o premier_programme</code></p>
+<blockquote><p><code>gcc -Wall premier.c -o premier</code></p>
 </blockquote>
 <p>Les options permettent :</p>
 <ul>
 <li><code>Wall</code> : d'afficher l'ensemble des avertissements produits par la compilation</li>
-<li><code>-o</code> : de choisir le nom de l'exécutable généré. <blockquote><p><em>Note</em> : dans le cas particulier où on utiliser la bibliothèque <code>math.h</code>, il faut rajouter <code>-lm</code> à la commande de compilation.</p>
-</blockquote>
-</li>
+<li><code>-o</code> : de choisir le nom de l'exécutable généré. </li>
 </ul>
+<blockquote><p><em>Note 1</em> : dans le cas particulier où on utiliser la bibliothèque <code>math.h</code>, il faut rajouter <code>-lm</code> à la commande de compilation.</p>
+<p><em>Note 2</em> : les options de compilation avec le kernel C actuel étant limitées, on ne peut pas ajouter<code>-lm</code> à la commande de compilation dans ce notebook. Si vous devez utiliser <code>math.h</code>, il faut utiliser une ligne de commande pour compiler et non une cellule de code dans Jupyter notebook.</p>
+</blockquote>
 <p>Le pré-processeur fournit un unique fichier au compilateur, qui le transforme en un fichier binaire exécutable. 
 Ce pré-processeur :</p>
 <ul>
@@ -13597,8 +13598,8 @@ Il faut inclure le module <code>stdbool</code> pour utiliser le type booléen, e
 <p>Les opérateurs binaires <strong>/ et %</strong> utilisés sur <strong>des entiers</strong>, fournissent respectivement le quotient de le reste de la division entière des deux termes.</p>
 <blockquote><p><strong>Règle</strong> :</p>
 <ul>
-<li>Division <strong>entière</strong> : la division <code>a \ b</code> <strong>si <code>b</code> est entier</strong> fournit le quotient de la division entière. </li>
-<li>Division <strong>réélle</strong> : la division <code>a \ b</code> <strong>si <code>b</code> est réel</strong> fournit un résultat réel.</li>
+<li>Division <strong>entière</strong> : la division <code>a / b</code> <strong>si <code>b</code> est entier</strong> fournit le quotient de la division entière. </li>
+<li>Division <strong>réélle</strong> : la division <code>a / b</code> <strong>si <code>b</code> est réel</strong> fournit un résultat réel.</li>
 </ul>
 </blockquote>
 <p>Les opérateur unaires <strong>- et +</strong> s'appliquent aux entiers signés et aux types réels.</p>
@@ -15355,7 +15356,6 @@ Ici on a créé l'alias (le synonyme) <code>Date</code>.</p>
 <hr>
 <h3 id="Exercice-14-:-definir-et-utiliser-un-type-enregistrement">Exercice 14 : definir et utiliser un type enregistrement<a class="anchor-link" href="#Exercice-14-:-definir-et-utiliser-un-type-enregistrement">&#182;</a></h3><hr>
 <hr>
-<p>(cf fichier <strong><code>exercice14.c</code></strong>)</p>
 <p><strong>[14.1]</strong> Définir un type Point qui regroupe deux coordonnées entières, X et Y.</p>
 <p><strong>[14.2]</strong> Ecrire un programme principal qui génère deux points ptA et ptB au coordonnées (0,0) et (10,10) respectives. Il calcule la distance entre ptA et ptB en norme Euclidienne.</p>
 
@@ -15369,10 +15369,10 @@ Ici on a créé l'alias (le synonyme) <code>Date</code>.</p>
     <div class="input_area">
 <div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt; </span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;math.h&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp"></span>
 
 <span class="c1">// Definition du type Point </span>
+
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
     <span class="c1">// Déclarer deux variables ptA et ptB de types Point</span>
@@ -15384,7 +15384,7 @@ Ici on a créé l'alias (le synonyme) <code>Date</code>.</p>
     <span class="c1">// Calculer la distance entre ptA et ptB.</span>
     <span class="kt">float</span> <span class="n">distance</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     
-    <span class="n">assert</span><span class="p">(</span><span class="n">distance</span> <span class="o">==</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">200</span><span class="p">));</span>
+    <span class="n">assert</span><span class="p">(</span> <span class="kt">int</span><span class="p">(</span><span class="n">distance</span><span class="o">*</span><span class="n">distance</span><span class="p">)</span> <span class="o">==</span> <span class="mi">200</span><span class="p">);</span>
     
     <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
 <span class="p">}</span>
@@ -15481,9 +15481,9 @@ Ici on a créé l'alias (le synonyme) <code>Date</code>.</p>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     <span class="n">t_tableau</span> <span class="n">T</span><span class="p">;</span>
     <span class="c1">//Initialiser les éléments d&#39;une variable tableau à 0.0</span>
-    <span class="n">initialiser</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+    <span class="n">initialiser</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     <span class="c1">//Vérifier avec assert que tous les éléments vallent bien 0.0</span>
-    <span class="n">assert</span><span class="p">(</span><span class="n">est_vide</span><span class="p">(</span><span class="n">T</span><span class="p">));</span>
+    <span class="n">assert</span><span class="p">(</span><span class="n">est_vide</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
     
     <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
 <span class="p">}</span>
@@ -15873,7 +15873,7 @@ Par exemple :</p>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
     <span class="n">t_tableau</span> <span class="n">T</span><span class="p">;</span>
     <span class="c1">//Initialiser les éléments d&#39;une variable tableau à 0.0</span>
-    <span class="n">initialiser</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+    <span class="n">initialiser</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
     
     <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
 <span class="p">}</span>
@@ -16084,16 +16084,16 @@ Ainsi, l'appel à une fonction sur des paramètres réels variables ne modifie p
 
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">t_tab_note</span> <span class="n">notes</span><span class="p">;</span>
+    <span class="n">t_tab_notes</span> <span class="n">notes</span><span class="p">;</span>
     
     <span class="c1">//Initialiser les éléments d&#39;une variable tableau à 0.0</span>
-    <span class="n">initialiser</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">);</span>
-    <span class="n">initialiser</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">);</span>
-    <span class="n">initialiser</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+    <span class="n">initialiser_note</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">);</span>
+    <span class="n">initialiser_note</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">);</span>
+    <span class="n">initialiser_note</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
     
     <span class="c1">//Calculer la moyenne des 3 notes</span>
     <span class="kt">float</span> <span class="n">moy</span> <span class="o">=</span> <span class="n">moyenne</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-    <span class="n">assert</span><span class="p">(</span><span class="n">moy</span> <span class="o">==</span> <span class="mi">10</span><span class="o">*</span><span class="mf">0.2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">*</span><span class="mf">0.3</span> <span class="o">+</span> <span class="mi">12</span><span class="o">*</span><span class="mf">0.5</span><span class="p">);</span>
+    <span class="n">assert</span><span class="p">(</span> <span class="kt">int</span><span class="p">(</span><span class="n">moy</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="o">==</span> <span class="kt">int</span><span class="p">((</span><span class="mi">10</span><span class="o">*</span><span class="mf">0.2</span> <span class="o">+</span> <span class="mi">1</span><span class="o">*</span><span class="mf">0.3</span> <span class="o">+</span> <span class="mi">12</span><span class="o">*</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">));</span>
     <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
