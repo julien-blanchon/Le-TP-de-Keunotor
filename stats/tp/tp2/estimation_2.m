@@ -1,5 +1,5 @@
 
-function [a_star, b_star] = estimation_2(x_i, y_i, );
+function [a_star, b_star] = estimation_2(x_i, y_i);
     % Estimation par projection orthogonal de B sur Im(A).
     % Construire A et B
     A = x_i(:);

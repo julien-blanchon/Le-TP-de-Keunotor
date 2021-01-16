@@ -2,7 +2,7 @@
 exercice_3;
 
 % Estimation de la droite de regression par resolution du systeme CY = 0 :
-[theta_Dorth_2,rho_Dorth_2] = estimation_4(x_donnees_bruitees,y_donnees_bruitees);
+[theta_Dorth_2, rho_Dorth_2] = estimation_4(x_donnees_bruitees,y_donnees_bruitees);
 
 % Affichage de la droite de regression estimee par resolution du systeme lineaire CY = 0 :
 cos_theta_Dorth_2 = cos(theta_Dorth_2);
@@ -14,7 +14,7 @@ else
     y_Dorth_2 = y_D;
     x_Dorth_2 = (rho_Dorth_2-y_Dorth_2*sin_theta_Dorth_2)/cos_theta_Dorth_2;
 end
-plot(x_Dorth_2,y_Dorth2,'g','LineWidth',3);
+plot(x_Dorth_2,y_Dorth_2,'g','LineWidth',3);
 lg = legend('~Droite', ...
     '~Donnees bruitees', ...
     '~$D\perp$ (maximum de vraisemblance)', ...

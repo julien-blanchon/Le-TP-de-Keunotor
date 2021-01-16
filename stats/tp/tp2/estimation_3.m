@@ -24,6 +24,6 @@ function [theta_Dorth_1,rho_Dorth_1] = estimation_3(x_i, y_i, n_tests);
          theta_star = theta_star - pi;
          rho_star = x_G*cos(theta_star)+y_G*sin(theta_star);
     end;
-    theta_Dorth_1 = theta_star
-    rho_Dorth_1 = rho_star
+    theta_Dorth_1 = theta_star;
+    rho_Dorth_1 = rho_star;
 end
