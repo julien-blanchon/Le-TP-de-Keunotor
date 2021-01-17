@@ -1,0 +1,27 @@
+(* BE : Session 1 2019 *)
+(* Implémentation de la fonction somme des premiers entiers par un algorithme ascendant *)
+
+module Somme
+
+  use int.Int
+  use int.ComputerDivision
+  use ref.Refint
+
+  let somme (n: int) : int
+    requires {(0<=n) }
+    ensures  { result = (div (n*(n+1)) 2) }
+  =
+    let i = ref 0 in
+    let r = ref 0 in
+    while  (!i < n) do
+      invariant { (!r=(div (!i*(!i+1)) 2) && 0<= !i <=n ) }
+      variant   { n - (!i) }
+      i := (!i) + 1;
+      r :=  (!r) + (!i)
+    done;
+    !r
+
+end
+
+(* On a utilisé split_vc, puis 4 fois Alt-Ergo *)
+
