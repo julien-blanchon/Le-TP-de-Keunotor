@@ -1,3 +1,4 @@
+
 clear;
 close all;
 taille_ecran = get(0,'ScreenSize');

@@ -10,7 +10,7 @@ cos_alpha = cos(alpha);
 seuil_norme = 2/sin(alpha);		% Seuil sur la norme du gradient (decoule d'une etude theorique)
 
 % Chargement des donnees :
-% load Donnees/parquet;
+%load Donnees/parquet;
 load Donnees/bateau;
 [n_lignes,n_colonnes] = size(I);
 limites_affichages = [1 n_colonnes 1 n_lignes];
