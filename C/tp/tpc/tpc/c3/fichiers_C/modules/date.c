@@ -29,7 +29,7 @@ Date date_aujourd_hui(){
     convertir_vers_date(t, &auj);
     return auj;
 }
+/*static*/ 
 void afficher_date(Date d){
     printf("Date %i/%i/%i \n",d.jour, (d.mois+1), d.annee);
 }
-

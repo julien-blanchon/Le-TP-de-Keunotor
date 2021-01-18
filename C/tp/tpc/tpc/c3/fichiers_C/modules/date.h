@@ -34,6 +34,7 @@ void initialiser(Date* date);
 Date date_aujourd_hui();
 
 // Affiche dans stdout la date d'aujourd'hui au format d.jour/(d.mois+1)/d.annee
+// void afficher_date(Date d);
 void afficher_date(Date d);
 
 // Convertit la date au format time_t de time.h en une date de type Date
