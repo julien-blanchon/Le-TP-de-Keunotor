@@ -1,0 +1,26 @@
+Dans ce fichier `reponses1.txt`, 
+
+
+[Question 1.1] Indiquer 
+- comment obtenir le ou les exécutables par compilation séparée.
+`gcc -std=c99 -Wextra -pedantic -c file.c file.h`
+`gcc -std=c99 -Wextra -pedantic -c exemple_file.c`
+`gcc -std=c99 -Wextra -pedantic -c test_file.c`
+
+
+- les dépendances entre les fichiers qui constituent l’application.
+exemple_file -> file
+test_file -> file
+
+- le rôle de la règle `.PHONY` dans Makefile.
+Refaire toute la compilation: clean puis recompiler
+
+[Question 1.5] Indiquer
+- Quel est le sous-programme non-visible des autres modules et défini dans le module File.
+`est_vide` et `cellule` (définis dans .c mais pas .h).
+
+- Que se passe-t-il si on enlève le mot-clé static à la compilation ?  
+La fonction `cellule` sera donc accessible a tout les programme.
+
+- Quel est le risque de ne pas le mettre ?
+Le contenus des Cellule pourra être modifier par l'utilisateur et donc introduire des incohérence.
