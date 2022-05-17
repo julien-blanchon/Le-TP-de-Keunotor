@@ -1,0 +1,34 @@
+Indiquer vos réponses aux questions de l'exercice 1 du Bilan 2 ci-après : 
+
+[B1.1] Quelle est la portée de chaque variable déclarée ? Pour chaque variable, on donnera le numéro de ligne où commence et se termine sa portée.
+
+#VARIABLE: (*l7) int n = 10; (de *l7 à *l20 puis de *l26 à *l37)
+
+#VARIABLE: (*l8) int *p = NULL; (de *l8 à *l37)
+
+#VARIABLE: (*l13) int a = 5; (de *l13 à *l18)
+
+#VARIABLE: (*l22) int n = 7; (de *l22 à *l25)
+
+#VARIABLE: (*l30) double r = 11; (de *l30 à *l33)
+
+[B1.2] Y a-t-il un exemple de masquage de variable dans ce programme ?
+
+Oui la variable "int n=7" ou "int a=5".
+
+[B1.3] Peut-on savoir ce que devrait afficher l’exécution de ce programme ?
+
+Non car les addresses des pointeurs ne peuvent être connus avant l'exécution
+
+[B1.4] Même s’il compile sans erreur, ce programme est faux. Pourquoi ?
+
+Car la valeur de a bien que masqué est garder dans le pointeur p.
+
+[B1.5] La valeur de `p` change-t-elle après l’initialisation de la ligne 14 ?
+
+Non car l'addresse de p reste l'addresse de la variable a.
+
+[B1.6] Que se passerait-il si on modifiait `*p` après la ligne 19 ?
+
+Rien de spécial ? On modifierais alors la valeur de la variable a. Qui aurait du être masqué mais que ne l'es plus vraiment.
+Donc possiblement d'une autre variable quelconque du programme.

@@ -6,3 +6,4 @@
 ###### Diff for texte file
 *.md diff=word
 *.txt diff=word
+*.zip filter=lfs diff=lfs merge=lfs -text
